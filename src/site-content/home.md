@@ -32,6 +32,13 @@ work:
       - 'Shipping user-facing features, making payment systems more reliable, resolving stuck user funds, collaborating cross-functionally across Business, Tax, Legal, Product teams and third-party vendors.'
     href: /work/google
     logo: google
+  - org: Apple · Hyderabad, India
+    role: Intern · Ad Platform · Software Engineering
+    dates: 7 months · Jan – Jul 2021
+    points:
+      - Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.
+    href: ''
+    logo: apple
 publications:
   - venue: NeurIPS 2026 · Evaluations & Datasets Track
     status: Accepted

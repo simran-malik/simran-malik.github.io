@@ -189,4 +189,5 @@ a.card:hover, .job:hover .card { border-color: var(--line-strong); color: var(--
 .grid-4 { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 40px 32px; }
 .grid-4 h3 { font-size: 26px; }
 .grid-4 p { font-size: 16px; line-height: 1.55; }
+#projects .thumb { background: var(--card); border-color: #dfcca8; } /* same as the publication card */
 .cover-word { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 4vw, 56px); color: var(--muted); letter-spacing: 0.02em; }

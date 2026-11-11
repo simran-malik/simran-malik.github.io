@@ -42,8 +42,8 @@ const logoFor = (name: string) => {
     <section id="work" class="screen">
       <span class="label">Work</span>
       <div class="timeline">
-        {work.map((job) => (
-          <a class="job" href={job.href}>
+        {work.map((job) => { const Job = job.href ? 'a' : 'div'; return (
+          <Job class="job" {...(job.href ? { href: job.href } : {})}>
             <div class="rail">
               {(() => { const src = logoFor(job.logo); return (
                 <div class={src ? 'logo has-img' : 'logo'}>{src ? <img src={src} alt="" /> : <span aria-hidden="true">{initial(job.org)}</span>}</div>
@@ -53,10 +53,10 @@ const logoFor = (name: string) => {
               <div class="row"><span class="kicker">{job.org}</span><span class="meta">{job.dates}</span></div>
               <h3>{job.role}</h3>
               <ul>{job.points.map((p) => <li>{p}</li>)}</ul>
-              <span class="read-more">Read more →</span>
+              {job.href && <span class="read-more">Read more →</span>}
             </div>
-          </a>
-        ))}
+          </Job>
+        ); })}
       </div>
     </section>
 

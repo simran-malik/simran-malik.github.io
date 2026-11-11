@@ -41,7 +41,7 @@ export default defineConfig({
             fields: [
               text('org', 'Organization'), text('role', 'Role'), text('dates', 'Dates'),
               text('points', 'Bullet points', { list: true }),
-              text('href', 'Link to case study (e.g. /work/google)'),
+              text('href', 'Link to case study (e.g. /work/google); leave empty for no page'),
               text('logo', 'Logo file name in /public/logos (no extension)'),
             ],
           },
