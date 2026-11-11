@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "astro dev",
+    "dev": "tinacms dev -c \"astro dev\"",
+    "dev:site": "astro dev",
     "build": "astro build",
     "preview": "astro preview"
   },
@@ -12,5 +13,9 @@
     "@iconify-json/mdi": "^1.2.0",
     "astro": "^5.0.0",
     "astro-icon": "^1.1.0"
+  },
+  "devDependencies": {
+    "@tinacms/cli": "^3.0.0",
+    "tinacms": "^3.15.2"
   }
 }

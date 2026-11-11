@@ -6,3 +6,8 @@ dist/
 
 # Claude app scratch folder
 Claude outputs/
+
+# TinaCMS (local-only editor): generated files, never published
+public/admin/
+tina/__generated__/
+tina/tina-lock.json

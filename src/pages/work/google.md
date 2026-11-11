@@ -8,7 +8,7 @@ facts:
   Role: Software Engineer
   When: Jul 2021 – Aug 2025
   Where: Bangalore, India
-  Patents: 2 pending
+  Patents: 2 in preparation
 ---
 
 ## Reliability at scale
