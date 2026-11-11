@@ -2,7 +2,7 @@
 role: Applied AI Engineer
 stats:
   - value: 4+ yrs
-    label: Google · scale
+    label: Google
   - value: NeurIPS
     label: 2026 co-author
   - value: '2'
@@ -32,12 +32,12 @@ work:
       - 'Shipping user-facing features, making payment systems more reliable, resolving stuck user funds, collaborating cross-functionally across Business, Tax, Legal, Product teams and third-party vendors.'
     href: /work/google
     logo: google
-  - org: Apple · Hyderabad, India
+  - org: Apple · India
     role: Intern · Ad Platform · Software Engineering
-    dates: 7 months · Jan – Jul 2021
+    dates: 6 months · Jan – Jul 2021
     points:
-      - Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.
-    href: ''
+      - 'Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.'
+    href: /work/apple
     logo: apple
 publications:
   - venue: NeurIPS 2026 · Evaluations & Datasets Track
@@ -96,4 +96,4 @@ contactLine: Building something with AI? Have a question? Interested in collabor
 
 An **applied AI engineer** building AI-powered solutions across AI agents, search & retrieval, model training and fine-tuning. As a **NeurIPS 2026** co-author, skilled in evaluating AI systems and the sources they cite. Previously, a **software engineer** for **4+ years** at **Google** shipping critical high-volume distributed systems.
 
-I combine my powers of **backend software engineering** at scale, **AI-powered solutioneering** and **research-level rigorous experimentation** to build AI systems which work on a bad day.
+I combine my powers of **backend software engineering** at scale, **AI-powered solutions** and **research-level rigorous experimentation** to build AI systems which work on a bad day.
