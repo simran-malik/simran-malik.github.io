@@ -3,27 +3,27 @@ layout: ../../layouts/CaseStudy.astro
 title: Software Engineer
 summary: Four years building and running payment backends for 12M+ daily orders.
 org: Google · India
-dates: 4 years 1 month · Jul 2021 – Aug 2025
+dates: 4+ years · Jul 2021 – Aug 2025
 points:
-  - Shipping user-facing features, making payment systems more reliable, resolving stuck user funds, collaborating cross-functionally across Business, Tax, Legal, Product teams and third-party vendors.
+  - 'Shipping user-facing features, making payment systems more reliable, resolving stuck user funds, collaborating cross-functionally across Business, Tax, Legal, Product teams and third-party vendors.'
 logo: google
-order: 3
+order: 4
 facts: []
+construction: true
 back: /#work
 backLabel: All work
-construction: true
 ---
 
 ## Reliability at scale
 
-- **Unblocked users' money.** Resolved 300K+ stuck orders — a 99% reduction — by tracing order-state inconsistencies through the full order lifecycle, then added automated monitoring so they wouldn't come back.
-- **Absorbed bank outages.** Added caching to absorb failure spikes from banking systems, cutting requests to third-party vendors by 20% and taking throttled orders from 46K+ to zero.
-- **Raised partner reliability.** Worked with Google Pay's external partners to move their APIs to higher-availability systems, cutting failure rates from 2.80% to 1.28% for bill payments and 0.61% to 0.57% for recharges. Recognised with a tech lead bonus for keeping 12M+ daily orders running without disruption.
+* **Unblocked users' money.** Resolved 300K+ stuck orders — a 99% reduction — by tracing order-state inconsistencies through the full order lifecycle, then added automated monitoring so they wouldn't come back.
+* **Absorbed bank outages.** Added caching to absorb failure spikes from banking systems, cutting requests to third-party vendors by 20% and taking throttled orders from 46K+ to zero.
+* **Raised partner reliability.** Worked with Google Pay's external partners to move their APIs to higher-availability systems, cutting failure rates from 2.80% to 1.28% for bill payments and 0.61% to 0.57% for recharges. Recognised with a tech lead bonus for keeping 12M+ daily orders running without disruption.
 
 ## Building new systems
 
-- **Partner-integration framework.** Designed a reusable framework now behind 7M+ daily orders, and redesigned the recharge flow with zero pipeline interruption — cutting onboarding time for future partners by 75%.
-- **Invoicing platform.** Built an invoicing platform end to end handling 8K+ requests a day for a venture projected at $25M+ revenue, working across Business, Tax, UX and outside vendors. Received a Director's Spot Bonus for ownership and execution.
+* **Partner-integration framework.** Designed a reusable framework now behind 7M+ daily orders, and redesigned the recharge flow with zero pipeline interruption — cutting onboarding time for future partners by 75%.
+* **Invoicing platform.** Built an invoicing platform end to end handling 8K+ requests a day for a venture projected at $25M+ revenue, working across Business, Tax, UX and outside vendors. Received a Director's Spot Bonus for ownership and execution.
 
 ## What carried over to AI
 

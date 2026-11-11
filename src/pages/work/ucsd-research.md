@@ -2,7 +2,7 @@
 layout: ../../layouts/CaseStudy.astro
 title: Applied AI Researcher
 summary: Map question-answering for robots in Prof. Nikolai Atanasov's lab.
-org: Existential Robotics Laboratory · UC San Diego
+org: Existential Robotics Lab · UCSD
 dates: Oct 2026 - Present
 points:
   - Enabling robots to answer natural language questions about the world around them.

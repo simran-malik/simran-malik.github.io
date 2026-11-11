@@ -23,7 +23,7 @@ const facts: [string, string][] = [
       <a class="back" href={back}>← {backLabel}</a>
       {frontmatter.org && (
         <div class="case-org">
-          <span class="kicker">{frontmatter.org}</span>
+          <span class="kicker">{String(frontmatter.org).split(' · ').map((part, i) => <>{i > 0 && ' · '}<span class="nowrap">{part}</span></>)}</span>
           {frontmatter.dates && <span class="meta">{frontmatter.dates}</span>}
         </div>
       )}

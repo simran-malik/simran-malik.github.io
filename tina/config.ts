@@ -19,7 +19,7 @@ const caseStudy = (name: string, label: string, dir: string, back: string, backL
     text('title', titleLabel, { isTitle: true, required: true }),
     paragraph('summary', name === 'projects' ? 'Summary (page and homepage card)' : 'One-line summary (page only)'),
     ...card,
-    { type: 'number' as const, name: 'order', label: 'Position on the homepage (1 = first)' },
+    { type: 'number' as const, name: 'order', label: 'Fallback position (only used if missing from the Homepage order list)', ui: { component: 'hidden' } },
     {
       type: 'object' as const, name: 'facts', label: 'More facts for the page (e.g. Where, Course, Result)', list: true,
       ui: { itemProps: (i: any) => ({ label: `${i?.label ?? ''}: ${i?.value ?? ''}` }) },
@@ -73,6 +73,16 @@ export default defineConfig({
             type: 'object', name: 'stats', label: 'Stats row', list: true,
             ui: { itemProps: (i: any) => ({ label: `${i?.value ?? ''} · ${i?.label ?? ''}` }) },
             fields: [text('value', 'Big number'), text('label', 'Label')],
+          },
+          {
+            type: 'object', name: 'workOrder', label: 'Work order on the homepage (drag to reorder; top = first)', list: true,
+            ui: { itemProps: (i: any) => ({ label: (i?.page || 'Pick a page').split('/').pop() }) },
+            fields: [{ type: 'reference', name: 'page', label: 'Page', collections: ['work'] }],
+          },
+          {
+            type: 'object', name: 'projectOrder', label: 'Project order on the homepage (drag to reorder)', list: true,
+            ui: { itemProps: (i: any) => ({ label: (i?.page || 'Pick a page').split('/').pop() }) },
+            fields: [{ type: 'reference', name: 'page', label: 'Page', collections: ['projects'] }],
           },
           {
             type: 'object', name: 'publications', label: 'Publications', list: true,

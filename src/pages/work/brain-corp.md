@@ -1,14 +1,14 @@
 ---
 layout: ../../layouts/CaseStudy.astro
 title: Intern · Applied AI · Software Engineering
-summary: Two systems for autonomous store robots — a map you can ask questions, and job-time estimates learned from real runs.
+summary: 'Two systems for autonomous store robots — a map you can ask questions, and job-time estimates learned from real runs.'
 org: Brain Corp · San Diego
-dates: 3 months · Jun - Sept 2026
+dates: 2+ months · Jun - Sept 2026
 points:
   - Built a knowledge graph and an agent that answer natural-language questions about a robot-built 3D store map
   - Shipped a cloud-to-robot pipeline that learns how long jobs really take from run history and shows a confidence range on the robot's screen.
 logo: brain-corp
-order: 2
+order: 3
 facts:
   - label: Stack
     value: Python · Go · SQL · GCP

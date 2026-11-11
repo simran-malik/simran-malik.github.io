@@ -12,17 +12,21 @@ import fs from 'node:fs';
 
 // Work and project cards come from their own pages, so each is edited in one place.
 // `order` sets the position on this page: 1 = first.
-const byOrder = (a: any, b: any) => (a.order ?? 999) - (b.order ?? 999);
+// Order comes from the drag-and-drop lists on the Homepage in Tina (workOrder / projectOrder);
+// pages not in a list go at the end, sorted by their own `order` number.
 const fileName = (path: string) => (path.split('/').pop() || '').replace('.md', '');
-const fromPages = (mods: Record<string, any>, dir: string) =>
-  Object.entries(mods)
+const fromPages = (mods: Record<string, any>, dir: string, list: any[] = []) => {
+  const paths = (list ?? []).map((x: any) => (typeof x === 'string' ? x : x?.page) || '');
+  const rank = (name: string) => { const i = paths.findIndex((p: string) => fileName(p) === name); return i === -1 ? Infinity : i; };
+  return Object.entries(mods)
     .filter(([path]) => !fileName(path).startsWith('_'))
-    .map(([path, mod]) => ({ ...mod.frontmatter, href: '/' + dir + '/' + fileName(path) }))
-    .sort(byOrder);
-const work = fromPages(import.meta.glob('./work/*.md', { eager: true }), 'work').map((j: any) => ({
+    .map(([path, mod]) => ({ ...mod.frontmatter, href: '/' + dir + '/' + fileName(path), name: fileName(path) }))
+    .sort((a: any, b: any) => (rank(a.name) - rank(b.name)) || ((a.order ?? 999) - (b.order ?? 999)));
+};
+const work = fromPages(import.meta.glob('./work/*.md', { eager: true }), 'work', home.frontmatter.workOrder).map((j: any) => ({
   org: j.org ?? '', role: j.title ?? '', dates: j.dates ?? '', points: (j.points ?? []) as string[], href: j.href as string, logo: j.logo ?? '',
 }));
-const projects = fromPages(import.meta.glob('./projects/*.md', { eager: true }), 'projects').map((p: any) => ({
+const projects = fromPages(import.meta.glob('./projects/*.md', { eager: true }), 'projects', home.frontmatter.projectOrder).map((p: any) => ({
   title: p.title ?? '', summary: p.summary ?? '', stack: p.stack ?? '', cover: p.cover ?? '', image: p.image ?? '', href: p.href as string,
 }));
 
@@ -72,7 +76,7 @@ const logoFor = (name: string) => {
                   {src ? <img src={src} alt="" /> : <span class="cover-word" aria-hidden="true">{job.org.split(/[\s·]+/)[0]}</span>}
                 </div>
                 <div class="zz-text">
-                  <span class="kicker">{job.org}</span>
+                  <span class="kicker">{job.org.split(' · ').map((part, i) => <>{i > 0 && ' · '}<span class="nowrap">{part}</span></>)}</span>
                   <h3>{job.role}</h3>
                   <span class="meta">{job.dates}</span>
                   {job.points[0] && <p>{job.points[0]}</p>}

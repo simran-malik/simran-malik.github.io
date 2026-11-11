@@ -266,3 +266,6 @@ a.card:hover { border-color: var(--line-strong); color: var(--ink); }
   .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .cf-row { grid-template-columns: 1fr; }
 }
+
+/* Keep each part of a company line together (e.g. "UC San Diego"); lines break only at the · */
+.nowrap { white-space: nowrap; }

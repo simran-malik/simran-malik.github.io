@@ -9,6 +9,19 @@ stats:
     label: Patents in Preparation
   - value: M.S.
     label: 'CS · AI, UC San Diego'
+workOrder:
+  - page: src/pages/work/ucsd-research.md
+  - page: src/pages/work/brain-corp.md
+  - page: src/pages/work/wuklab.md
+  - page: src/pages/work/google.md
+  - page: src/pages/work/apple.md
+projectOrder:
+  - page: src/pages/projects/rag-chatbot.md
+  - page: src/pages/projects/schema-linking.md
+  - page: src/pages/projects/slm-pretraining.md
+  - page: src/pages/projects/growth-rate-predictor.md
+  - page: src/pages/projects/lawmonade.md
+  - page: src/pages/projects/pupper-potter.md
 publications:
   - venue: NeurIPS 2026 · Evaluations & Datasets Track
     status: Accepted

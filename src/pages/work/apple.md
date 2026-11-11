@@ -7,7 +7,7 @@ dates: 6 months · Jan – Jul 2021
 points:
   - Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.
 logo: apple
-order: 4
+order: 5
 facts: []
 back: /#work
 backLabel: All work
