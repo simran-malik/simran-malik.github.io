@@ -24,6 +24,15 @@ export const site = {
   // Google Analytics 4 Measurement ID, e.g. 'G-ABC123XYZ'. Leave '' to turn analytics off.
   analyticsId: 'G-7VPY4V0SXC',
   contactLine: home.contactLine ?? '',
+  contactNote: home.contactNote ?? '',
+};
+
+// Contact form → Google Form. Paste the form's "formResponse" address and its question ids (entry.123…).
+// While `action` is empty, Send opens the visitor's email app with their message filled in instead.
+export const contactForm = {
+  // "Contact Simran" Google Form
+  action: 'https://docs.google.com/forms/d/e/1FAIpQLSeV0MhbRWUAsyoLWtvi_qrxqxvSxTLxtDqbhUf7Jxp9-AyIqg/formResponse',
+  fields: { name: 'entry.46303116', email: 'entry.735820289', message: 'entry.1952716244' },
 };
 
 export const stats: { value: string; label: string }[] = home.stats ?? [];

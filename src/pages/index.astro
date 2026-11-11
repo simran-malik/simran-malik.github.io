@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import Links from '../components/Links.astro';
-import { site, stats, publications, fun, funIntro, funSummary } from '../data';
+import { site, stats, publications, fun, funIntro, funSummary, contactForm } from '../data';
 
 import { getPosts, formatDate } from '../lib/blog';
 import photo from '../assets/simran.png';
@@ -154,9 +154,42 @@ const logoFor = (name: string) => {
 
     <section id="contact" class="screen" style="gap: 36px">
       <span class="label">Contact</span>
-      <p class="contact-line">{site.contactLine}</p>
-      <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
-      <Links />
+      <div class="contact-grid">
+        <div class="contact-intro">
+          <p class="contact-line">{site.contactLine}</p>
+          {site.contactNote && <p class="contact-note">{site.contactNote}</p>}
+          <Links />
+        </div>
+        <form class="contact-form" id="contact-form" novalidate
+          data-action={contactForm.action} data-f-name={contactForm.fields.name}
+          data-f-email={contactForm.fields.email} data-f-message={contactForm.fields.message}
+          data-mailto={site.email}>
+          <div class="cf-row">
+            <div class="cf-field">
+              <label for="cf-name">Name<span class="cf-req" aria-hidden="true"> *</span></label>
+              <input id="cf-name" name="name" type="text" autocomplete="name" required aria-required="true" aria-describedby="cf-name-err" />
+              <span class="cf-err" id="cf-name-err" aria-live="polite"></span>
+            </div>
+            <div class="cf-field">
+              <label for="cf-email">Email<span class="cf-req" aria-hidden="true"> *</span></label>
+              <input id="cf-email" name="email" type="email" autocomplete="email" required aria-required="true" aria-describedby="cf-email-err" />
+              <span class="cf-err" id="cf-email-err" aria-live="polite"></span>
+            </div>
+          </div>
+          <div class="cf-field">
+            <label for="cf-message">Message<span class="cf-req" aria-hidden="true"> *</span></label>
+            <textarea id="cf-message" name="message" rows="6" required aria-required="true" aria-describedby="cf-message-err"></textarea>
+            <span class="cf-err" id="cf-message-err" aria-live="polite"></span>
+          </div>
+          <div class="cf-trap" aria-hidden="true">
+            <label for="cf-website">Leave this empty</label>
+            <input id="cf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+          </div>
+          <span class="cf-legend"><span class="cf-req">*</span> Required</span>
+          <button class="cf-send" type="submit">Send message</button>
+          <p class="cf-status" role="status" aria-live="polite"></p>
+        </form>
+      </div>
       <span class="footer">© {new Date().getFullYear()} {site.name}</span>
     </section>
 
@@ -188,4 +221,57 @@ const logoFor = (name: string) => {
     { threshold: [0.5, 0.75] }
   );
   sections.forEach((s) => observer.observe(s));
+</script>
+
+<script>
+  // Contact form: checks the fields, then sends to the Google Form (or opens an email if none is set up yet).
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  if (form) {
+    const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+    const showError = (id: string, msg: string) => {
+      const input = $(id);
+      const err = document.getElementById(`${id}-err`)!;
+      err.textContent = msg;
+      input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+    };
+    const status = form.querySelector('.cf-status')!;
+    const button = form.querySelector('.cf-send') as HTMLButtonElement;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name = $('cf-name').value.trim();
+      const email = $('cf-email').value.trim();
+      const message = $('cf-message').value.trim();
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      showError('cf-email', !email ? 'Please add your email' : emailOk ? '' : 'Please enter a valid email');
+      showError('cf-message', message ? '' : 'Please add a message');
+      showError('cf-name', name ? '' : 'Please add your name');
+      if (!name || !emailOk || !message) {
+        (!name ? $('cf-name') : !emailOk ? $('cf-email') : $('cf-message')).focus();
+        return;
+      }
+      if ($('cf-website').value) return; // spam trap: only bots fill this in
+
+      const d = form.dataset;
+      if (!d.action) {
+        // No Google Form yet: open the visitor's email app with the message filled in.
+        const body = `${message}\n\n— ${name} (${email})`;
+        location.href = `mailto:${d.mailto}?subject=${encodeURIComponent('Hello from your website')}&body=${encodeURIComponent(body)}`;
+        return;
+      }
+      const data = new FormData();
+      data.append(d.fName!, name);
+      data.append(d.fEmail!, email);
+      data.append(d.fMessage!, message);
+      button.disabled = true;
+      status.textContent = 'Sending…';
+      try {
+        await fetch(d.action, { method: 'POST', mode: 'no-cors', body: data });
+        form.innerHTML = '<p class="cf-thanks">Thanks! I\'ll get back to you soon.</p>';
+      } catch {
+        button.disabled = false;
+        status.textContent = `Sorry, that didn't send. Please try again, or email me at ${d.mailto}.`;
+      }
+    });
+  }
 </script>

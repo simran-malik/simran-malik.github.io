@@ -108,6 +108,7 @@ export default defineConfig({
             ],
           },
           paragraph('contactLine', 'Contact line'),
+          paragraph('contactNote', 'Contact: line under the contact line (e.g. reply time)'),
         ],
       },
       caseStudy('work', 'Work', 'work', '/#work', 'All work', workCard, 'Role (page heading and homepage card)'),
