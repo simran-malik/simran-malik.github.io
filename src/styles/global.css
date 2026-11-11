@@ -173,3 +173,7 @@ a.card:hover, .job:hover .card { border-color: var(--line-strong); color: var(--
 [data-tip]:hover::after, [data-tip]:focus-visible::after {
   opacity: 1; transform: translate(-50%, 0);
 }
+
+/* ── Highlight the nav link for the section on screen ── */
+.nav a { transition: color 0.2s; text-underline-offset: 8px; }
+.nav a[aria-current='true'] { color: var(--ink); text-decoration: underline; text-decoration-color: var(--line-strong); }

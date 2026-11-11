@@ -104,3 +104,30 @@ const initial = (org: string) => org.trim().charAt(0);
 
   </main>
 </Base>
+
+<script>
+  // Keep the address bar (and the highlighted nav link) in sync with the section on screen.
+  const sections = [...document.querySelectorAll<HTMLElement>('main > section[id]')];
+  const navLinks = [...document.querySelectorAll<HTMLAnchorElement>('.nav a')];
+  let current = '';
+
+  const setActive = (id: string) => {
+    if (id === current) return;
+    current = id;
+    const url = id === 'top' ? location.pathname + location.search : `#${id}`;
+    history.replaceState(null, '', url);
+    navLinks.forEach((a) => {
+      if (a.getAttribute('href') === `#${id}`) a.setAttribute('aria-current', 'true');
+      else a.removeAttribute('aria-current');
+    });
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      const visible = entries.filter((e) => e.isIntersecting).sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+      if (visible) setActive(visible.target.id);
+    },
+    { threshold: [0.5, 0.75] }
+  );
+  sections.forEach((s) => observer.observe(s));
+</script>
