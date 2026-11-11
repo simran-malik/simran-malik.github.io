@@ -1,24 +1,27 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Graduate Researcher, UC San Diego
+title: Applied AI Researcher
 summary: Map question-answering for robots in Prof. Nikolai Atanasov's lab.
+org: Existential Robotics Laboratory · UC San Diego
+dates: Oct 2026 - Present
+points:
+  - Enabling robots to answer natural language questions about the world around them.
+logo: ucsd
+order: 1
+facts: []
+construction: true
 back: /#work
 backLabel: All work
-facts:
-  Role: Graduate Researcher
-  When: Fall 2026 – now
-  Lab: Prof. Nikolai Atanasov
-construction: true
 ---
 
 ## The question
 
-[What you're trying to find out, in a sentence anyone could follow.]
+\[What you're trying to find out, in a sentence anyone could follow.]
 
 ## Approach
 
-[How you're tackling it.]
+\[How you're tackling it.]
 
 ## Status
 
-[Where it stands now and what's next.]
+\[Where it stands now and what's next.]

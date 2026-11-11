@@ -3,11 +3,28 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import Links from '../components/Links.astro';
-import { site, stats, work, publications, projects, fun, funIntro, funSummary } from '../data';
+import { site, stats, publications, fun, funIntro, funSummary } from '../data';
+
 import { getPosts, formatDate } from '../lib/blog';
 import photo from '../assets/simran.png';
 import * as home from '../site-content/home.md';
 import fs from 'node:fs';
+
+// Work and project cards come from their own pages, so each is edited in one place.
+// `order` sets the position on this page: 1 = first.
+const byOrder = (a: any, b: any) => (a.order ?? 999) - (b.order ?? 999);
+const fileName = (path: string) => (path.split('/').pop() || '').replace('.md', '');
+const fromPages = (mods: Record<string, any>, dir: string) =>
+  Object.entries(mods)
+    .filter(([path]) => !fileName(path).startsWith('_'))
+    .map(([path, mod]) => ({ ...mod.frontmatter, href: '/' + dir + '/' + fileName(path) }))
+    .sort(byOrder);
+const work = fromPages(import.meta.glob('./work/*.md', { eager: true }), 'work').map((j: any) => ({
+  org: j.org ?? '', role: j.title ?? '', dates: j.dates ?? '', points: (j.points ?? []) as string[], href: j.href as string, logo: j.logo ?? '',
+}));
+const projects = fromPages(import.meta.glob('./projects/*.md', { eager: true }), 'projects').map((p: any) => ({
+  title: p.title ?? '', summary: p.summary ?? '', stack: p.stack ?? '', cover: p.cover ?? '', image: p.image ?? '', href: p.href as string,
+}));
 
 const posts = await getPosts(2);
 const bio = await home.compiledContent(); // the summary, edited in TinaCMS

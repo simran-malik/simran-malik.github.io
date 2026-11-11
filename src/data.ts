@@ -3,8 +3,9 @@
 //  Edit text here; the page updates as soon as you save.
 //  Anything in [SQUARE BRACKETS] is a placeholder to fill in.
 //
-//  Homepage text (summary, stats, work, publications, projects,
-//  contact line) now lives in src/site-content/home.md so you can
+//  Homepage text (summary, stats, publications, Life, contact line)
+//  lives in src/site-content/home.md; work and project cards come
+//  from their own pages. All of it is editable in TinaCMS so you can
 //  edit it in TinaCMS at http://localhost:4321/admin/index.html.
 // ─────────────────────────────────────────────────────────────
 
@@ -27,21 +28,12 @@ export const site = {
 
 export const stats: { value: string; label: string }[] = home.stats ?? [];
 
-// Newest first. `href` points to a page in src/pages/work/.
-// `logo` is a file name in /public/logos/ without the extension (svg, png, jpg or webp all work).
-// If the file isn't there yet, the card shows the company's first letter instead.
-export const work: { org: string; role: string; dates: string; points: string[]; href: string; logo: string }[] =
-  (home.work ?? []).map((j: any) => ({ ...j, points: j.points ?? [], logo: j.logo ?? '' }));
+// Work and project cards are read from their own pages (src/pages/work, src/pages/projects) in src/pages/index.astro.
 
 export const publications: {
   venue: string; status: string; title: string; authors: string;
   paragraphs: string[]; links: { label: string; href: string }[]; pending: string;
 }[] = (home.publications ?? []).map((p: any) => ({ ...p, paragraphs: p.paragraphs ?? [], links: p.links ?? [], pending: p.pending ?? '' }));
-
-// `cover` is the short word shown on the card when there's no `image`.
-// `image` is optional: put a file in /public/projects/ and write e.g. '/projects/rag.png'.
-export const projects: { title: string; summary: string; stack: string; cover: string; image: string; href: string }[] =
-  (home.projects ?? []).map((p: any) => ({ ...p, image: p.image ?? '', cover: p.cover ?? '' }));
 
 // The Life section: your interests. `image` (optional) is a path like '/fun/tea.jpg' in /public.
 export const funIntro: string = home.funIntro ?? '';

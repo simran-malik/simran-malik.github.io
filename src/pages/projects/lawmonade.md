@@ -1,12 +1,16 @@
 ---
 layout: ../../layouts/CaseStudy.astro
 title: Law-monade
-summary: A hackathon build that turns a live personal-injury case into a one-screen brief, with every fact linked back to its source.
+summary: Hackathon build that turns a live personal-injury case into a one-screen brief, with every fact linked to its source.
+stack: Python · FastAPI · Claude / Gemini
+cover: LAW
+image: ''
+order: 5
+facts:
+  - label: Built at
+    value: Swans Applied AI Hackathon
 back: /#projects
 backLabel: All projects
-facts:
-  Built at: Swans Applied AI Hackathon
-  Stack: Python · Streamlit · FastAPI · Claude / Gemini · Clio API
 construction: true
 repo: https://github.com/simran-malik/lawmonade
 ---

@@ -6,6 +6,45 @@ import { defineConfig } from 'tinacms';
 const text = (name: string, label: string, extra: object = {}) => ({ type: 'string' as const, name, label, ...extra });
 const paragraph = (name: string, label: string) => text(name, label, { ui: { component: 'textarea' } });
 
+
+// Shared fields for the case-study pages in src/pages/work and src/pages/projects.
+// `card` = the fields that also show on the homepage card.
+const caseStudy = (name: string, label: string, dir: string, back: string, backLabel: string, card: any[], titleLabel = 'Title') => ({
+  name, label, path: `src/pages/${dir}`, format: 'md' as const,
+  match: { exclude: '_*' },
+  defaultItem: () => ({ layout: '../../layouts/CaseStudy.astro', back, backLabel, construction: true, order: 99 }),
+  ui: { filename: { slugify: (v: any) => (v?.title || '').toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '') } },
+  fields: [
+    text('layout', 'Layout (leave as is)', { ui: { component: 'hidden' } }),
+    text('title', titleLabel, { isTitle: true, required: true }),
+    paragraph('summary', name === 'projects' ? 'Summary (page and homepage card)' : 'One-line summary (page only)'),
+    ...card,
+    { type: 'number' as const, name: 'order', label: 'Position on the homepage (1 = first)' },
+    {
+      type: 'object' as const, name: 'facts', label: 'More facts for the page (e.g. Where, Course, Result)', list: true,
+      ui: { itemProps: (i: any) => ({ label: `${i?.label ?? ''}: ${i?.value ?? ''}` }) },
+      fields: [text('label', 'Label'), text('value', 'Value')],
+    },
+    { type: 'boolean' as const, name: 'construction', label: 'Show "under construction" note' },
+    text('repo', 'GitHub repo link (shown in that note)'),
+    text('back', 'Back link (leave as is)', { ui: { component: 'hidden' } }),
+    text('backLabel', 'Back link text'),
+    { type: 'rich-text' as const, name: 'body', label: 'Page content', isBody: true },
+  ],
+});
+
+const workCard = [
+  text('org', 'Company / lab (homepage card)'),
+  text('dates', 'Dates (card and page)'),
+  text('points', 'Card bullet points (the first one shows)', { list: true }),
+  text('logo', 'Logo file name in /public/logos (no extension)'),
+];
+const projectCard = [
+  text('stack', 'Stack (card and page)'),
+  text('cover', 'Cover word (card, shown when there is no image)'),
+  { type: 'image' as const, name: 'image', label: 'Image (card thumbnail and page header)' },
+];
+
 export default defineConfig({
   branch: '',
   clientId: null,
@@ -36,16 +75,6 @@ export default defineConfig({
             fields: [text('value', 'Big number'), text('label', 'Label')],
           },
           {
-            type: 'object', name: 'work', label: 'Work', list: true,
-            ui: { itemProps: (i: any) => ({ label: i?.org }) },
-            fields: [
-              text('org', 'Organization'), text('role', 'Role'), text('dates', 'Dates'),
-              text('points', 'Bullet points', { list: true }),
-              text('href', 'Link to case study (e.g. /work/google); leave empty for no page'),
-              text('logo', 'Logo file name in /public/logos (no extension)'),
-            ],
-          },
-          {
             type: 'object', name: 'publications', label: 'Publications', list: true,
             ui: { itemProps: (i: any) => ({ label: i?.title }) },
             fields: [
@@ -56,16 +85,6 @@ export default defineConfig({
                 fields: [text('label', 'Label'), text('href', 'URL')],
               },
               text('pending', 'Note when there is no public link yet'),
-            ],
-          },
-          {
-            type: 'object', name: 'projects', label: 'Projects', list: true,
-            ui: { itemProps: (i: any) => ({ label: i?.title }) },
-            fields: [
-              text('title', 'Title'), paragraph('summary', 'Summary'), text('stack', 'Stack'),
-              text('cover', 'Cover word (shown when there is no image)'),
-              text('image', 'Image path (e.g. /projects/rag.png)'),
-              text('href', 'Link to project page'),
             ],
           },
           text('funIntro', 'Life section: short line beside the heading'),
@@ -91,6 +110,8 @@ export default defineConfig({
           paragraph('contactLine', 'Contact line'),
         ],
       },
+      caseStudy('work', 'Work', 'work', '/#work', 'All work', workCard, 'Role (page heading and homepage card)'),
+      caseStudy('projects', 'Projects', 'projects', '/#projects', 'All projects', projectCard, 'Title (page heading and homepage card)'),
     ],
   },
 });

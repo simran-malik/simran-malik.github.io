@@ -1,14 +1,20 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: RAG chatbot for RapidFire AI docs
-summary: A question-answering system over technical documentation, built to work inside a tight 2,000-token context budget.
+title: RAG-based Q&A
+summary: Multi-stage retrieval for technical documentation under a 2,000-token budget; ranked 3rd of 141 teams with 0.978 correctness.
+stack: LangChain · FAISS · HuggingFace
+cover: RAG
+image: ''
+order: 1
+facts:
+  - label: When
+    value: Spring 2026
+  - label: Course
+    value: UCSD CSE 234
+  - label: Result
+    value: 3rd of 141 teams
 back: /#projects
 backLabel: All projects
-facts:
-  When: Spring 2026
-  Course: UCSD CSE 234
-  Stack: LangChain · FAISS · HuggingFace
-  Result: 3rd of 141 teams
 construction: true
 repo: https://github.com/simran-malik/ask
 ---

@@ -1,14 +1,20 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Small language model from scratch
-summary: Pretraining a decoder-only Transformer on 10B tokens, and making the GPU work four times harder.
+title: Small Language Model Training
+summary: Trained a 98M-parameter Transformer on 10B tokens; ranked 5th, and quadrupled GPU utilization to 47%.
+stack: PyTorch · nanoGPT · RTX 5090
+cover: SLM
+image: ''
+order: 3
+facts:
+  - label: When
+    value: Winter 2026
+  - label: Course
+    value: UCSD CSE 251B
+  - label: Result
+    value: Rank 5 · perplexity 20.03
 back: /#projects
 backLabel: All projects
-facts:
-  When: Winter 2026
-  Course: UCSD CSE 251B
-  Stack: PyTorch · nanoGPT · RTX 5090
-  Result: Rank 5 · perplexity 20.03
 construction: true
 repo: https://github.com/simran-malik/nano-gpt-contest
 ---

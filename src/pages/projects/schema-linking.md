@@ -1,14 +1,20 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Schema linking with LoRA fine-tuning
-summary: Teaching a small model which tables and columns a question needs — the first step of natural-language-to-SQL.
+title: Supervised Fine-Tuning for Natural Language Schema Linking
+summary: Four-stage pipeline of fine-tuned adapters on Qwen2.5-Coder, raising schema-linking score from 0.097 to 0.627.
+stack: PyTorch · PEFT · Qwen2.5
+cover: SFT
+image: ''
+order: 2
+facts:
+  - label: When
+    value: Spring 2026
+  - label: Course
+    value: UCSD CSE 234
+  - label: Result
+    value: 0.097 → 0.627
 back: /#projects
 backLabel: All projects
-facts:
-  When: Spring 2026
-  Course: UCSD CSE 234
-  Stack: PyTorch · HuggingFace PEFT · Qwen2.5
-  Result: 0.097 → 0.627
 construction: true
 repo: https://github.com/simran-malik/fetch
 ---

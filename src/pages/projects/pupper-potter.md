@@ -1,13 +1,18 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Pupper Potter
-summary: A Harry Potter–themed game played with a four-legged robot.
+title: 'Pupper Potter: An interactive trivia with the Mini Pupper robot'
+summary: A Harry Potter–themed game on a quadruped robot, coordinated by a distributed ROS2 state machine.
+stack: ROS2 · Python · Piper TTS
+cover: ROS2
+image: ''
+order: 6
+facts:
+  - label: When
+    value: Winter 2026
+  - label: Course
+    value: UCSD CSE 276
 back: /#projects
 backLabel: All projects
-facts:
-  When: Winter 2026
-  Course: UCSD CSE 276
-  Stack: ROS2 · Python · Piper TTS · GPIO
 construction: true
 repo: https://github.com/Kehiio/Triwizard_Pupper
 ---

@@ -1,13 +1,16 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Software Engineering Intern, Apple Ads
+title: Intern · Software Engineering
 summary: Six months on the Apple Ads platform team, building an internal data management portal.
+org: Apple · India
+dates: 6 months · Jan – Jul 2021
+points:
+  - Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.
+logo: apple
+order: 4
+facts: []
 back: /#work
 backLabel: All work
-facts:
-  Role: Intern · Ad Platform · Software Engineering
-  When: Jan – Jul 2021
-  Where: Hyderabad, India
 construction: true
 ---
 

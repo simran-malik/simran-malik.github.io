@@ -4,12 +4,32 @@
 import Base from './Base.astro';
 
 const { frontmatter } = Astro.props;
-const { title, summary, facts = {}, back = '/#work', backLabel = 'Back', image, construction = false, repo = '' } = frontmatter;
+const { title, summary, facts: rawFacts = [], back = '/#work', backLabel = 'Back', image, construction = false, repo = '' } = frontmatter;
+// facts: a list of { label, value } (older pages may still use a plain label: value map).
+const listed: [string, string][] = Array.isArray(rawFacts)
+  ? rawFacts.filter((f: any) => f?.label).map((f: any) => [f.label, f.value ?? ''])
+  : Object.entries(rawFacts).map(([k, v]) => [k, String(v)]);
+// Dates and stack are the same values shown on the homepage card (a work page's title is its role).
+const facts: [string, string][] = [
+  ...(frontmatter.dates && !frontmatter.org ? [['When', frontmatter.dates] as [string, string]] : []),
+  ...listed,
+  ...(frontmatter.stack ? [['Stack', frontmatter.stack] as [string, string]] : []),
+];
 // construction: true shows the "under construction" note; repo: a GitHub link offered in the meantime.
 ---
 <Base title={`${title} — Simran Malik`} description={summary}>
   <main class="case">
-    <a class="back" href={back}>← {backLabel}</a>
+    <div class="case-head">
+      <a class="back" href={back}>← {backLabel}</a>
+      {frontmatter.org && (
+        <div class="case-org">
+          <span class="kicker">{frontmatter.org}</span>
+          {frontmatter.dates && <span class="meta">{frontmatter.dates}</span>}
+        </div>
+      )}
+      <h1>{title}</h1>
+      {summary && <p class="summary">{summary}</p>}
+    </div>
     {construction && (
       <div class="construction" role="note">
         <img src="/under-construction.png" alt="Under construction" width="60" height="71" />
@@ -20,14 +40,12 @@ const { title, summary, facts = {}, back = '/#work', backLabel = 'Back', image, 
         </p>
       </div>
     )}
-    <h1>{title}</h1>
-    {summary && <p class="summary">{summary}</p>}
-    {Object.keys(facts).length > 0 && (
+    {facts.length > 0 && (
       <div class="facts">
-        {Object.entries(facts).map(([k, v]) => <div><span>{k}</span><span set:html={String(v)} /></div>)}
+        {facts.map(([k, v]) => <div><span>{k}</span><span set:html={v} /></div>)}
       </div>
     )}
-    {image ? <img src={image} alt="" /> : <div class="thumb">Demo GIF, screenshot or architecture diagram</div>}
+    {image && <img src={image} alt="" />}
     <div class="prose"><slot /></div>
   </main>
 </Base>

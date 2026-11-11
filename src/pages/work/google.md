@@ -1,14 +1,16 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: Software Engineer, Google Pay
+title: Software Engineer
 summary: Four years building and running payment backends for 12M+ daily orders.
+org: Google · India
+dates: 4 years 1 month · Jul 2021 – Aug 2025
+points:
+  - Shipping user-facing features, making payment systems more reliable, resolving stuck user funds, collaborating cross-functionally across Business, Tax, Legal, Product teams and third-party vendors.
+logo: google
+order: 3
+facts: []
 back: /#work
 backLabel: All work
-facts:
-  Role: Software Engineer
-  When: Jul 2021 – Aug 2025
-  Where: Bangalore, India
-  Patents: 2 in preparation
 construction: true
 ---
 

@@ -227,3 +227,11 @@ a.card:hover { border-color: var(--line-strong); color: var(--ink); }
   position: sticky; top: var(--hdr); z-index: 5; background: var(--bg);
   padding-block: 12px; margin-block: -12px;
 }
+
+/* Work pages: company on the left, dates on the right, above the heading */
+.case-org { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 24px; }
+
+/* Case-study pages: back link, company, title and summary stay pinned while the page scrolls. */
+.case-head { position: sticky; top: var(--hdr); z-index: 5; background: var(--bg);
+  display: flex; flex-direction: column; gap: 16px; padding: 16px 0 20px; margin-top: -16px; border-bottom: 1px solid var(--line); }
+@media (max-width: 760px), (max-height: 700px) { .case-head { position: static; border-bottom: 0; } }

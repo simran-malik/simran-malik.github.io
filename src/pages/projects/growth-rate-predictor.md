@@ -1,11 +1,14 @@
 ---
 layout: ../../layouts/CaseStudy.astro
 title: Growth rate predictor
-summary: Predicting a population's exponential growth rate from genetic data, with neural networks trained on simulated populations.
+summary: Predicting a population's growth rate from genetic data with an MLP and a CNN trained on simulated populations.
+stack: Python · PyTorch · msprime
+cover: CV
+image: ''
+order: 4
+facts: []
 back: /#projects
 backLabel: All projects
-facts:
-  Stack: Python · PyTorch · msprime
 construction: true
 repo: https://github.com/simran-malik/growth-rate-predictor
 ---
