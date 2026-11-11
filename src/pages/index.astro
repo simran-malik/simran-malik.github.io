@@ -22,15 +22,17 @@ const logoFor = (name: string) => {
 <Base snap>
   <main class="container">
 
-    <section id="top" class="screen" style="gap: 64px">
+    <section id="top" class="screen" style="gap: 32px">
       <div class="hero">
         <div class="hero-text">
           <span class="label">{site.role}</span>
           <h1>{site.name}</h1>
           <div class="bio" set:html={bio} />
+        </div>
+        <div class="hero-side">
+          <Image class="photo" src={photo} alt={`Portrait of ${site.name}`} width={640} height={640} loading="eager" />
           <Links />
         </div>
-        <Image class="photo" src={photo} alt={`Portrait of ${site.name}`} width={640} height={640} loading="eager" />
       </div>
       <div class="stats">
         {stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}

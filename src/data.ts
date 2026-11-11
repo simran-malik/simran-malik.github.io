@@ -49,6 +49,10 @@ export const funSummary: string = home.funSummary ?? '';
 export const fun: { title: string; note: string; image: string; link: string }[] =
   (home.fun ?? []).map((f: any) => ({ title: f.title ?? '', note: f.note ?? '', image: f.image ?? '', link: f.link ?? '' }));
 
+// Optional: replace a blog post's cover on this site only. `post` is the post's Hashnode URL.
+export const blogCovers: { post: string; image: string }[] =
+  (home.blogCovers ?? []).filter((c: any) => c?.post && c?.image);
+
 // Used only if the blog feed can't be reached while the site builds.
 export const fallbackPosts = [
   {

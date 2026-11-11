@@ -61,7 +61,7 @@ html.snap { scroll-snap-type: y mandatory; }
 .more { font-size: 17px; font-weight: 500; }
 
 /* ── Hero ── */
-.hero { display: flex; flex-wrap: wrap; gap: 64px; align-items: center; justify-content: space-between; }
+.hero { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 64px; align-items: center; justify-content: space-between; }
 .hero-text { flex: 1 1 520px; min-width: 0; max-width: 760px; display: flex; flex-direction: column; gap: 28px; }
 .hero h1 { margin: 0; font-family: var(--serif); font-weight: 300; font-size: clamp(64px, 8vw, 112px); line-height: 0.95; letter-spacing: -0.01em; }
 .bio { margin: 0; font-size: clamp(19px, 1.6vw, 22px); line-height: 1.6; color: var(--muted); }
@@ -70,6 +70,8 @@ html.snap { scroll-snap-type: y mandatory; }
 .bio p + p { margin-top: 0.8em; }
 .bio a { color: var(--ink); }
 .fun-summary { max-width: 60ch; }
+.hero-side { flex: 0 0 auto; display: flex; flex-direction: column; align-items: center; gap: 24px; }
+.hero-side .links { justify-content: center; }
 .photo { flex: 0 0 auto; width: clamp(200px, 22vw, 320px); height: auto; aspect-ratio: 1; border-radius: 50%; object-fit: cover; }
 .stats { display: flex; flex-wrap: wrap; gap: 20px 72px; align-items: baseline; }
 .stat { display: flex; gap: 12px; align-items: baseline; }

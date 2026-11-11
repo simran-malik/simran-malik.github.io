@@ -81,6 +81,9 @@ fun:
   - title: Knitting & Crocheting
     note: 'Crafted 4 mufflers, 1 pair of gloves, 1 crochet top while listening to audiobooks'
     image: /crochet.JPG
+blogCovers:
+  - post: 'https://simranbuilds.hashnode.dev/build-your-v0'
+    image: /imperfect-action-cover.png
 contactLine: Building something with AI? Have a question? Interested in collaborating? I'd love to hear about it.
 ---
 

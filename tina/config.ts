@@ -80,6 +80,14 @@ export default defineConfig({
               text('link', 'Link (optional, e.g. a Goodreads list)'),
             ],
           },
+          {
+            type: 'object', name: 'blogCovers', label: 'Blog card covers (optional overrides)', list: true,
+            ui: { itemProps: (i: any) => ({ label: i?.post || 'New cover' }) },
+            fields: [
+              text('post', 'Post URL (copy it from Hashnode)'),
+              { type: 'image', name: 'image', label: 'Cover image to show on this site' },
+            ],
+          },
           paragraph('contactLine', 'Contact line'),
         ],
       },

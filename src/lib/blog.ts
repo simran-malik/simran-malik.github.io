@@ -1,4 +1,4 @@
-import { site, fallbackPosts } from '../data';
+import { site, fallbackPosts, blogCovers } from '../data';
 
 export type Post = {
   title: string;
@@ -31,6 +31,13 @@ const readTime = (html: string) => {
   return words > 50 ? `${Math.max(1, Math.round(words / 220))} min read` : undefined;
 };
 
+// Compare URLs loosely (ignore http/https, "www.", query strings and a trailing slash).
+const norm = (u: string) => u.trim().toLowerCase().replace(/^https?:\/\//, '').replace(/^www\./, '').replace(/[?#].*$/, '').replace(/\/+$/, '');
+const withCover = (p: Post): Post => {
+  const o = blogCovers.find((c) => norm(c.post) === norm(p.url));
+  return o ? { ...p, cover: o.image } : p;
+};
+
 /** Reads the newest posts from the Hashnode RSS feed when the site builds. */
 export async function getPosts(limit = 2): Promise<Post[]> {
   try {
@@ -57,11 +64,11 @@ export async function getPosts(limit = 2): Promise<Post[]> {
         readTime: readTime(content),
       };
     });
-    if (posts.length) return posts;
+    if (posts.length) return posts.map(withCover);
     throw new Error('feed had no posts');
   } catch (err) {
     console.warn(`[blog] using fallback posts: ${(err as Error).message}`);
-    return fallbackPosts.slice(0, limit);
+    return fallbackPosts.slice(0, limit).map(withCover);
   }
 }
 
