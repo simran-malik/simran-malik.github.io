@@ -1,0 +1,22 @@
+---
+// Layout for the Markdown pages in src/pages/work/ and src/pages/projects/.
+// Each page sets these fields at the top (its "frontmatter").
+import Base from './Base.astro';
+
+const { frontmatter } = Astro.props;
+const { title, summary, facts = {}, back = '/#work', backLabel = 'Back', image } = frontmatter;
+---
+<Base title={`${title} — Simran Malik`} description={summary}>
+  <main class="case">
+    <a class="back" href={back}>← {backLabel}</a>
+    <h1>{title}</h1>
+    {summary && <p class="summary">{summary}</p>}
+    {Object.keys(facts).length > 0 && (
+      <div class="facts">
+        {Object.entries(facts).map(([k, v]) => <div><span>{k}</span><span set:html={String(v)} /></div>)}
+      </div>
+    )}
+    {image ? <img src={image} alt="" /> : <div class="thumb">Demo GIF, screenshot or architecture diagram</div>}
+    <div class="prose"><slot /></div>
+  </main>
+</Base>

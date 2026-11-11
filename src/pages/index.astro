@@ -1,0 +1,106 @@
+---
+import { Image } from 'astro:assets';
+import { Icon } from 'astro-icon/components';
+import Base from '../layouts/Base.astro';
+import Links from '../components/Links.astro';
+import { site, stats, work, publications, projects } from '../data';
+import { getPosts, formatDate } from '../lib/blog';
+import photo from '../assets/simran.png';
+
+const posts = await getPosts(2);
+const initial = (org: string) => org.trim().charAt(0);
+---
+<Base snap>
+  <main class="container">
+
+    <section id="top" class="screen" style="gap: 64px">
+      <div class="hero">
+        <div class="hero-text">
+          <span class="label">{site.role}</span>
+          <h1>{site.name}</h1>
+          <p class="bio" set:html={site.bio} />
+          <Links />
+        </div>
+        <Image class="photo" src={photo} alt={`Portrait of ${site.name}`} width={640} height={640} loading="eager" />
+      </div>
+      <div class="stats">
+        {stats.map((s) => <div class="stat"><b>{s.value}</b><span>{s.label}</span></div>)}
+      </div>
+    </section>
+
+    <section id="work" class="screen">
+      <span class="label">Work</span>
+      <div class="timeline">
+        {work.map((job) => (
+          <a class="job" href={job.href}>
+            <div class="rail">
+              <div class="logo">{job.logo ? <img src={job.logo} alt="" /> : <span aria-hidden="true">{initial(job.org)}</span>}</div>
+            </div>
+            <div class="card">
+              <div class="row"><span class="kicker">{job.org}</span><span class="meta">{job.dates}</span></div>
+              <h3>{job.role}</h3>
+              <ul>{job.points.map((p) => <li>{p}</li>)}</ul>
+              <span class="read-more">Read more →</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="publications" class="screen">
+      <span class="label">Publications</span>
+      {publications.map((p) => (
+        <article class="card pub">
+          <div class="row section-head"><span class="kicker" style="font-size: 14px">{p.venue}</span><span class="meta">{p.status}</span></div>
+          <h3>{p.title}</h3>
+          <span class="authors">{p.authors}</span>
+          <div class="two-col">{p.paragraphs.map((t) => <p>{t}</p>)}</div>
+          <div class="pub-links">
+            {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label} <Icon name="mdi:open-in-new" /></a>)}
+            {p.pending && <span class="meta" style="font-weight: 400">{p.pending}</span>}
+          </div>
+        </article>
+      ))}
+    </section>
+
+    <section id="projects" class="screen">
+      <span class="label">Projects</span>
+      <div class="grid">
+        {projects.map((p) => (
+          <a class="tile" href={p.href}>
+            <div class="thumb">{p.image ? <img src={p.image} alt="" /> : 'Screenshot / diagram'}</div>
+            <h3>{p.title}</h3>
+            <p>{p.summary}</p>
+            <span class="tag">{p.stack}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="blog" class="screen">
+      <div class="section-head">
+        <span class="label">Blog</span>
+        <a class="more" href={site.blog} target="_blank" rel="noopener">All posts ↗</a>
+      </div>
+      <div class="grid">
+        {posts.map((post) => (
+          <a class="tile" href={post.url} target="_blank" rel="noopener">
+            <div class="thumb">{post.cover ? <img src={post.cover} alt="" loading="lazy" /> : 'Post cover image'}</div>
+            <h3>{post.title}</h3>
+            {post.subtitle && <p>{post.subtitle}</p>}
+            <span class="tag">{[formatDate(post.date), post.readTime].filter(Boolean).join(' · ')}</span>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section id="contact" class="screen" style="gap: 36px">
+      <span class="label">Contact</span>
+      <p class="contact-line">{site.contactLine}</p>
+      <a class="email" href={`mailto:${site.email}`}>{site.email}</a>
+      <Links />
+      <span class="footer">© {new Date().getFullYear()} {site.name}</span>
+    </section>
+
+  </main>
+</Base>

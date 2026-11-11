@@ -1,0 +1,23 @@
+---
+import { site } from '../data';
+
+interface Props { onHome?: boolean }
+const { onHome = false } = Astro.props;
+// On the home page the links scroll; on other pages they go back to the home page section.
+const to = (id: string) => (onHome ? `#${id}` : `/#${id}`);
+const links = [
+  { label: 'Work', href: to('work') },
+  { label: 'Publications', href: to('publications') },
+  { label: 'Projects', href: to('projects') },
+  { label: 'Blog', href: to('blog') },
+  { label: 'Contact', href: to('contact') },
+];
+---
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href={onHome ? '#top' : '/'}>{site.name}</a>
+    <nav class="nav" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+  </div>
+</header>
