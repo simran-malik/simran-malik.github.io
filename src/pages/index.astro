@@ -74,7 +74,7 @@ const logoFor = (name: string) => {
           const duration = parts.length > 1 ? parts[0] : '';
           return (
             <>
-              <div class="zz-dot-cell" style={`--r: ${i + 1}`}>
+              <div class={`zz-dot-cell ${side}`} style={`--r: ${i + 1}`}>
                 <div class="zz-dot" aria-hidden="true"></div>
                 <div class="zz-when">
                   <span class="zz-range">{range}</span>
