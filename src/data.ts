@@ -26,7 +26,8 @@ export const stats = [
 ];
 
 // Newest first. `href` points to a page in src/pages/work/.
-// `logo` is optional: put a file in /public/logos/ and write e.g. '/logos/google.svg'.
+// `logo` is a file name in /public/logos/ without the extension (svg, png, jpg or webp all work).
+// If the file isn't there yet, the card shows the company's first letter instead.
 export const work = [
   {
     org: "UC San Diego · Prof. Nikolai Atanasov's lab",
@@ -34,7 +35,7 @@ export const work = [
     dates: 'Fall 2026 – now',
     points: ['Map question-answering for robots. [One line on your approach.]'],
     href: '/work/ucsd-research',
-    logo: '',
+    logo: 'ucsd',
   },
   {
     org: 'Brain Corp · San Diego',
@@ -45,7 +46,7 @@ export const work = [
       'Built a robot job-time (ETA) estimation pipeline. [Result with a number]',
     ],
     href: '/work/brain-corp',
-    logo: '',
+    logo: 'brain-corp',
   },
   {
     org: 'Google',
@@ -56,7 +57,7 @@ export const work = [
       '[Second major point] · 2 patents pending.',
     ],
     href: '/work/google',
-    logo: '',
+    logo: 'google',
   },
 ];
 

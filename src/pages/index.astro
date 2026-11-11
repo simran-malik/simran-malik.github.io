@@ -6,9 +6,16 @@ import Links from '../components/Links.astro';
 import { site, stats, work, publications, projects } from '../data';
 import { getPosts, formatDate } from '../lib/blog';
 import photo from '../assets/simran.png';
+import fs from 'node:fs';
 
 const posts = await getPosts(2);
 const initial = (org: string) => org.trim().charAt(0);
+// Finds public/logos/<name>.(svg|png|jpg|jpeg|webp); returns '' if there's no such file yet.
+const logoFiles = fs.existsSync('public/logos') ? fs.readdirSync('public/logos') : [];
+const logoFor = (name: string) => {
+  const file = logoFiles.find((f) => /\.(svg|png|jpe?g|webp)$/i.test(f) && f.replace(/\.[^.]+$/, '') === name);
+  return file ? `/logos/${file}` : '';
+};
 ---
 <Base snap>
   <main class="container">
@@ -34,7 +41,9 @@ const initial = (org: string) => org.trim().charAt(0);
         {work.map((job) => (
           <a class="job" href={job.href}>
             <div class="rail">
-              <div class="logo">{job.logo ? <img src={job.logo} alt="" /> : <span aria-hidden="true">{initial(job.org)}</span>}</div>
+              {(() => { const src = logoFor(job.logo); return (
+                <div class={src ? 'logo has-img' : 'logo'}>{src ? <img src={src} alt="" /> : <span aria-hidden="true">{initial(job.org)}</span>}</div>
+              ); })()}
             </div>
             <div class="card">
               <div class="row"><span class="kicker">{job.org}</span><span class="meta">{job.dates}</span></div>
