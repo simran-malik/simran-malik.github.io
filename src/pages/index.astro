@@ -66,7 +66,7 @@ const logoFor = (name: string) => {
           <div class="two-col">{p.paragraphs.map((t) => <p>{t}</p>)}</div>
           <div class="pub-links">
             {p.links.map((l) => <a href={l.href} target="_blank" rel="noopener">{l.label} <Icon name="mdi:open-in-new" /></a>)}
-            {p.pending && <span class="meta" style="font-weight: 400">{p.pending}</span>}
+            {'pending' in p && p.pending && <span class="meta" style="font-weight: 400">{p.pending}</span>}
           </div>
         </article>
       ))}
@@ -74,10 +74,10 @@ const logoFor = (name: string) => {
 
     <section id="projects" class="screen">
       <span class="label">Projects</span>
-      <div class="grid">
+      <div class="grid grid-4">
         {projects.map((p) => (
           <a class="tile" href={p.href}>
-            <div class="thumb">{p.image ? <img src={p.image} alt="" /> : 'Screenshot / diagram'}</div>
+            <div class="thumb">{p.image ? <img src={p.image} alt="" /> : <span class="cover-word" aria-hidden="true">{p.cover}</span>}</div>
             <h3>{p.title}</h3>
             <p>{p.summary}</p>
             <span class="tag">{p.stack}</span>
