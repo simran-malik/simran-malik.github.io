@@ -9,6 +9,9 @@ import { site } from '../data';
   <a class="icon-btn" href={site.github} aria-label="GitHub" title="GitHub" target="_blank" rel="noopener">
     <Icon name="mdi:github" />
   </a>
+  <a class="icon-btn" href={`mailto:${site.email}`} aria-label={`Email ${site.email}`} title={site.email}>
+    <Icon name="mdi:email-outline" />
+  </a>
   <a class="pill" href={site.resume} title="Resume (PDF)" target="_blank" rel="noopener">
     <Icon name="mdi:file-document-outline" />Resume
   </a>

@@ -10,7 +10,7 @@ export const site = {
   // <strong> words show in darker ink, like the screenshot.
   bio: `I bring production engineering rigor to AI systems — four years at Google building for <strong>12M+ daily orders</strong>, now designing multi-agent AI systems at Brain Corp. <strong>NeurIPS 2026</strong> co-author. Master's in Computer Science at UC San Diego, specializing in artificial intelligence.`,
   description: 'Simran Malik — applied AI engineer. Multi-agent systems, evaluation, and production backend engineering.',
-  email: '[YOUR EMAIL]',
+  email: 'malik.simran4@gmail.com',
   linkedin: 'https://www.linkedin.com/in/simranmalik4/',
   github: 'https://github.com/simran-malik',
   blog: 'https://simranbuilds.hashnode.dev/',
