@@ -8,6 +8,8 @@ interface Props {
   description?: string;
   snap?: boolean; // one-section-per-screen scrolling (home page)
 }
+// Analytics only runs on the live site, so your own local previews aren't counted.
+const gaId = import.meta.env.PROD ? site.analyticsId : '';
 const { title = `${site.name} — ${site.role}`, description = site.description, snap = false } = Astro.props;
 ---
 <!doctype html>
@@ -26,6 +28,22 @@ const { title = `${site.name} — ${site.role}`, description = site.description,
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Hanken+Grotesk:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap"
     />
+    {gaId && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+        <script is:inline define:vars={{ gaId }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() { dataLayer.push(arguments); }
+          gtag('js', new Date());
+          gtag('config', gaId);
+          // Count resume opens as their own event (works even when the PDF opens in a new tab).
+          document.addEventListener('click', (e) => {
+            const a = e.target.closest && e.target.closest('a[href$=".pdf"]');
+            if (a) gtag('event', 'resume_download', { link_url: a.href, page_section: location.hash || '#top' });
+          });
+        </script>
+      </>
+    )}
   </head>
   <body>
     <Header onHome={snap} />
