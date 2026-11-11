@@ -1,6 +1,6 @@
 ---
 layout: ../../layouts/CaseStudy.astro
-title: AI Researcher
+title: Applied AI Researcher
 summary: 'Evaluating whether AI answers cite quality web sources. The work behind SourceBench, accepted at NeurIPS 2026.'
 org: WukLab · UCSD
 dates: 1+ year · Sep 2025 – Nov 2026
