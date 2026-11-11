@@ -30,8 +30,10 @@ publications:
     paragraphs:
       - 'Evaluated web sources cited by 12 AI systems on 8 quality metrics across 100 diverse questions. Proposed the research direction and the human-labeled ground truth, and built the evaluation pipeline behind the main results.'
       - 'Led the Google vs. AI-search study: top AI systems cite sources largely absent from Google''s top results (16% overlap for GPT-5 vs. 55% for Tavily). Also caught a prompt-bias bug that would have skewed every system''s results.'
-    links: []
-    pending: Paper · coming soon
+    links:
+      - label: Paper
+        href: 'https://neurips.cc/virtual/2026/loc/atlanta/poster/139217'
+    pending: ''
 funIntro: Away from keyboard
 funSummary: 'Usually, you can find me detecting edge cases where my AI system would fail, figuring out why, and iterating over solutions. Otherwise, you will find me curled up with a cosy murder mystery and a hot cup of tea!'
 fun:
