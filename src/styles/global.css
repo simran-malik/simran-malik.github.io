@@ -157,3 +157,19 @@ a.card:hover, .job:hover .card { border-color: var(--line-strong); color: var(--
 .prose h2 { font-family: var(--serif); font-weight: 300; font-size: 34px; color: var(--ink); margin: 48px 0 8px; }
 .prose a { text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 4px; }
 .prose img { border: 1px solid var(--line); margin: 24px 0; }
+
+/* ── Hover labels for the icon links ── */
+[data-tip] { position: relative; }
+[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute; bottom: calc(100% + 10px); left: 50%;
+  transform: translate(-50%, 4px);
+  padding: 6px 10px; border-radius: 6px;
+  background: var(--ink); color: var(--bg);
+  font: 500 13px/1 var(--sans); white-space: nowrap;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.15s, transform 0.15s;
+}
+[data-tip]:hover::after, [data-tip]:focus-visible::after {
+  opacity: 1; transform: translate(-50%, 0);
+}
