@@ -68,9 +68,19 @@ const logoFor = (name: string) => {
           const Item = job.href ? 'a' : 'div';
           const src = logoFor(job.logo);
           const side = i % 2 === 0 ? 'left' : 'right';
+          // "4+ years · Jul 2021 – Aug 2025" → duration + range (shown under the dot)
+          const parts = job.dates.split(' · ');
+          const range = parts.length > 1 ? parts.slice(1).join(' · ') : parts[0];
+          const duration = parts.length > 1 ? parts[0] : '';
           return (
             <>
-              <div class="zz-dot" style={`--r: ${i + 1}`} aria-hidden="true"></div>
+              <div class="zz-dot-cell" style={`--r: ${i + 1}`}>
+                <div class="zz-dot" aria-hidden="true"></div>
+                <div class="zz-when">
+                  <span class="zz-range">{range}</span>
+                  {duration && <span class="zz-dur">{duration}</span>}
+                </div>
+              </div>
               <Item class={`zz-item ${side}`} style={`--r: ${i + 1}`} {...(job.href ? { href: job.href } : {})}>
                 <div class="zz-square">
                   {src ? <img src={src} alt="" /> : <span class="cover-word" aria-hidden="true">{job.org.split(/[\s·]+/)[0]}</span>}
@@ -78,7 +88,7 @@ const logoFor = (name: string) => {
                 <div class="zz-text">
                   <span class="kicker">{job.org.split(' · ').map((part, i) => <>{i > 0 && ' · '}<span class="nowrap">{part}</span></>)}</span>
                   <h3>{job.role}</h3>
-                  <span class="meta">{job.dates}</span>
+                  <span class="meta zz-card-dates">{job.dates}</span>
                   {job.points[0] && <p>{job.points[0]}</p>}
                   {job.href && <span class="read-more">Read more →</span>}
                 </div>

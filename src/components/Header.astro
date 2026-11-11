@@ -6,6 +6,7 @@ const { onHome = false } = Astro.props;
 // On the home page the links scroll; on other pages they go back to the home page section.
 const to = (id: string) => (onHome ? `#${id}` : `/#${id}`);
 const links = [
+  { label: 'About', href: to('top') },
   { label: 'Work', href: to('work') },
   { label: 'Publications', href: to('publications') },
   { label: 'Projects', href: to('projects') },

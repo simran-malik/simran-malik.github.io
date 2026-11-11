@@ -101,13 +101,19 @@ html.snap { scroll-snap-type: y mandatory; }
 .icon-btn.email:hover { color: #ea4335; border-color: #ea4335; }
 
 /* ── Work timeline: vertical zig-zag ── */
-.zz { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr); grid-auto-rows: minmax(84px, auto); row-gap: 28px; }
+.zz { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) 150px minmax(0, 1fr); grid-auto-rows: minmax(84px, auto); row-gap: 28px; }
 .zz-line { grid-column: 2; grid-row: 1 / -1; justify-self: center; width: 1px; background: var(--line-strong); position: relative; }
 /* Arrowhead at the top of the line: time runs upward to the newest role. */
 .zz-line::before { content: ''; position: absolute; top: -2px; left: 50%; width: 11px; height: 11px;
   border-top: 1.5px solid var(--line-strong); border-left: 1.5px solid var(--line-strong); transform: translateX(-50%) rotate(45deg); transform-origin: center; }
-.zz-dot { grid-column: 2; grid-row: var(--r) / span 2; align-self: center; justify-self: center; z-index: 1;
-  width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+.zz-dot-cell { grid-column: 2; grid-row: var(--r) / span 2; align-self: center; justify-self: center; z-index: 1; position: relative; }
+.zz-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+/* Dates and duration sit just below each dot, over the line (page background behind them) */
+.zz-when { position: absolute; top: 24px; left: 50%; transform: translateX(-50%); width: 140px; padding: 4px 0; background: var(--bg);
+  display: flex; flex-direction: column; align-items: center; gap: 2px; text-align: center; }
+.zz-range { font-size: 13px; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.zz-dur { font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+.zz-card-dates { display: none; }
 .zz-item { grid-row: var(--r) / span 2; display: flex; align-items: center; gap: 16px; color: inherit; }
 .zz-item.left { grid-column: 1; flex-direction: row-reverse; justify-content: flex-start; text-align: right; }
 .zz-item.right { grid-column: 3; }
@@ -129,7 +135,8 @@ a.zz-item:hover .read-more { color: #163a78; text-decoration: underline; text-un
 /* Phones and narrow windows: one column with the line on the left. */
 @media (max-width: 900px) {
   .zz { position: relative; display: flex; flex-direction: column; gap: 40px; padding-left: 32px; border-left: 1px solid var(--line-strong); margin-left: 7px; }
-  .zz-line, .zz-dot { display: none; }
+  .zz-line, .zz-dot-cell { display: none; }
+  .zz-card-dates { display: inline; }
   .zz::after { content: ''; position: absolute; top: -2px; left: -1px; width: 11px; height: 11px;
     border-top: 1.5px solid var(--line-strong); border-left: 1.5px solid var(--line-strong); transform: translateX(-50%) rotate(45deg); }
   .zz-item, .zz-item.left { position: relative; flex-direction: column; align-items: flex-start; text-align: left; gap: 14px; }
