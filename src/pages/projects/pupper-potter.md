@@ -8,6 +8,8 @@ facts:
   When: Winter 2026
   Course: UCSD CSE 276
   Stack: ROS2 · Python · Piper TTS · GPIO
+construction: true
+repo: https://github.com/Kehiio/Triwizard_Pupper
 ---
 
 ## What it is

@@ -10,6 +10,8 @@ facts:
   Stack: "[Python, LangGraph]"
   Links: '<a href="#">Code</a> · <a href="#">Demo</a>'
 image: ""
+construction: true  # shows the "under construction" note; delete when the page is done
+repo: ""  # GitHub link shown in that note
 ---
 
 <!-- Copy this file for each project (e.g. projects/my-agent.md) and point `href` in src/data.ts to it. -->

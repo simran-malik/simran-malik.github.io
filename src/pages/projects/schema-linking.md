@@ -9,6 +9,8 @@ facts:
   Course: UCSD CSE 234
   Stack: PyTorch · HuggingFace PEFT · Qwen2.5
   Result: 0.097 → 0.627
+construction: true
+repo: https://github.com/simran-malik/fetch
 ---
 
 ## The problem

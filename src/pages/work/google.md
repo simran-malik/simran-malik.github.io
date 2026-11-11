@@ -9,6 +9,7 @@ facts:
   When: Jul 2021 – Aug 2025
   Where: Bangalore, India
   Patents: 2 in preparation
+construction: true
 ---
 
 ## Reliability at scale

@@ -9,6 +9,8 @@ facts:
   Course: UCSD CSE 251B
   Stack: PyTorch · nanoGPT · RTX 5090
   Result: Rank 5 · perplexity 20.03
+construction: true
+repo: https://github.com/simran-malik/nano-gpt-contest
 ---
 
 ## The problem

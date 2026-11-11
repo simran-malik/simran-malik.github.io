@@ -9,6 +9,7 @@
   --line: #d8c49f;
   --line-strong: #bfa77d;
   --accent: #a4472a;
+  --link: #1f4e9c; /* blue for links like "Read more →" */
 
   --serif: 'Cormorant Garamond', Georgia, serif;
   --sans: 'Hanken Grotesk', system-ui, sans-serif;
@@ -123,8 +124,8 @@ a.zz-item:hover .zz-text { border-color: var(--line-strong); }
 .zz-text h3 { margin: 0; font-family: var(--serif); font-weight: 300; font-size: clamp(24px, 2vw, 30px); line-height: 1.1; color: var(--ink); }
 .zz-text p { margin: 0; font-size: 16px; line-height: 1.5; color: var(--body); }
 .zz-text .meta { font-size: 14px; }
-.read-more { font-size: 15px; font-weight: 500; }
-a.zz-item:hover .read-more { color: var(--accent); }
+.read-more { font-size: 15px; font-weight: 500; color: var(--link); }
+a.zz-item:hover .read-more { color: #163a78; text-decoration: underline; text-underline-offset: 3px; }
 /* Phones and narrow windows: one column with the line on the left. */
 @media (max-width: 900px) {
   .zz { position: relative; display: flex; flex-direction: column; gap: 40px; padding-left: 32px; border-left: 1px solid var(--line-strong); margin-left: 7px; }
@@ -210,3 +211,19 @@ a.card:hover { border-color: var(--line-strong); color: var(--ink); }
 .grid-4 h3 { font-size: 26px; }
 .grid-4 p { font-size: 16px; line-height: 1.55; }
 .cover-word { font-family: var(--serif); font-weight: 300; font-size: clamp(36px, 4vw, 56px); color: var(--muted); letter-spacing: 0.02em; }
+
+/* "Under construction" note on case-study pages */
+.construction { margin: 0; padding: 16px 22px; background: var(--card); border: 1px dashed var(--line-strong);
+  display: flex; align-items: center; gap: 18px; font-size: 17px; line-height: 1.55; color: var(--body); }
+.construction img { flex: 0 0 auto; width: 60px; height: auto; }
+.construction p { margin: 0; }
+.construction strong { font-weight: 500; color: var(--ink); }
+.construction a { color: var(--link); font-weight: 500; text-decoration: underline; text-underline-offset: 3px; word-break: break-word; }
+.construction a:hover { color: #163a78; }
+
+/* Section headings (Work, Projects, Blog, Life…) stay pinned under the top bar
+   while you scroll through a section that is taller than the screen. */
+.screen > .label, .screen > .section-head {
+  position: sticky; top: var(--hdr); z-index: 5; background: var(--bg);
+  padding-block: 12px; margin-block: -12px;
+}

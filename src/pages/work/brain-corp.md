@@ -8,6 +8,7 @@ facts:
   Role: Robotics Software Engineering Intern
   When: Summer 2026, San Diego
   Stack: Python · Go · SQL · GCP
+construction: true
 ---
 
 ## Store-map Q&A: a knowledge graph and the agent that walks it

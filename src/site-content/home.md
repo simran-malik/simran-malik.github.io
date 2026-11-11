@@ -68,6 +68,18 @@ projects:
     cover: SLM
     image: ''
     href: /projects/slm-pretraining
+  - title: Growth rate predictor
+    summary: Predicting a population's growth rate from genetic data with an MLP and a CNN trained on simulated populations.
+    stack: Python · PyTorch · msprime
+    cover: CV
+    image: ''
+    href: /projects/growth-rate-predictor
+  - title: Law-monade
+    summary: 'Hackathon build that turns a live personal-injury case into a one-screen brief, with every fact linked to its source.'
+    stack: Python · FastAPI · Claude / Gemini
+    cover: LAW
+    image: ''
+    href: /projects/lawmonade
   - title: 'Pupper Potter: An interactive trivia with the Mini Pupper robot'
     summary: 'A Harry Potter–themed game on a quadruped robot, coordinated by a distributed ROS2 state machine.'
     stack: ROS2 · Python · Piper TTS
@@ -91,7 +103,7 @@ fun:
 blogCovers:
   - post: 'https://simranbuilds.hashnode.dev/build-your-v0'
     image: /imperfect-action-cover.png
-contactLine: Building something with AI? Have a question? Interested in collaborating? I'd love to hear about it.
+contactLine: Building something with AI? Interested in collaborating? I'd love to hear about it.
 ---
 
 An **applied AI engineer** building AI-powered solutions across AI agents, search & retrieval, model training and fine-tuning. As a **NeurIPS 2026** co-author, skilled in evaluating AI systems and the sources they cite. Previously, a **software engineer** for **4+ years** at **Google** shipping critical high-volume distributed systems.

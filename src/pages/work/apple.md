@@ -8,6 +8,7 @@ facts:
   Role: Intern · Ad Platform · Software Engineering
   When: Jan – Jul 2021
   Where: Hyderabad, India
+construction: true
 ---
 
 ## Data management portal for Apple Ads

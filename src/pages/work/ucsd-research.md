@@ -8,6 +8,7 @@ facts:
   Role: Graduate Researcher
   When: Fall 2026 – now
   Lab: Prof. Nikolai Atanasov
+construction: true
 ---
 
 ## The question

@@ -4,11 +4,22 @@
 import Base from './Base.astro';
 
 const { frontmatter } = Astro.props;
-const { title, summary, facts = {}, back = '/#work', backLabel = 'Back', image } = frontmatter;
+const { title, summary, facts = {}, back = '/#work', backLabel = 'Back', image, construction = false, repo = '' } = frontmatter;
+// construction: true shows the "under construction" note; repo: a GitHub link offered in the meantime.
 ---
 <Base title={`${title} — Simran Malik`} description={summary}>
   <main class="case">
     <a class="back" href={back}>← {backLabel}</a>
+    {construction && (
+      <div class="construction" role="note">
+        <img src="/under-construction.png" alt="Under construction" width="60" height="71" />
+        <p>
+          {repo
+            ? <>Till it's ready, here's the GitHub repo: <a href={repo} target="_blank" rel="noopener">{repo.replace(/^https?:\/\//, '')} ↗</a></>
+            : <>I'm still writing this one up. Check back soon!</>}
+        </p>
+      </div>
+    )}
     <h1>{title}</h1>
     {summary && <p class="summary">{summary}</p>}
     {Object.keys(facts).length > 0 && (

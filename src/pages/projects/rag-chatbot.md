@@ -9,6 +9,8 @@ facts:
   Course: UCSD CSE 234
   Stack: LangChain · FAISS · HuggingFace
   Result: 3rd of 141 teams
+construction: true
+repo: https://github.com/simran-malik/ask
 ---
 
 ## The problem
