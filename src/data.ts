@@ -16,7 +16,7 @@ export const site = {
   blog: 'https://simranbuilds.hashnode.dev/',
   resume: '/resume.pdf', // drop your PDF into /public/resume.pdf
   // Google Analytics 4 Measurement ID, e.g. 'G-ABC123XYZ'. Leave '' to turn analytics off.
-  analyticsId: '',
+  analyticsId: 'G-7VPY4V0SXC',
   contactLine: "Building something with AI? I'd love to hear about it.",
 };
 
