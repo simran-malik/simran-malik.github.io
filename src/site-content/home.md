@@ -33,7 +33,7 @@ work:
     href: /work/google
     logo: google
   - org: Apple · India
-    role: Intern · Ad Platform · Software Engineering
+    role: Intern · Software Engineering
     dates: 6 months · Jan – Jul 2021
     points:
       - 'Designed and built a data management portal for the Apple Ads platform, saving 10+ engineering hours per week.'
@@ -96,4 +96,4 @@ contactLine: Building something with AI? Have a question? Interested in collabor
 
 An **applied AI engineer** building AI-powered solutions across AI agents, search & retrieval, model training and fine-tuning. As a **NeurIPS 2026** co-author, skilled in evaluating AI systems and the sources they cite. Previously, a **software engineer** for **4+ years** at **Google** shipping critical high-volume distributed systems.
 
-I combine my powers of **backend software engineering** at scale, **AI-powered solutions** and **research-level rigorous experimentation** to build AI systems which work on a bad day.
+I combine my powers of **backend software engineering** at scale, **AI-powered solutions & evaluations** and **research-level rigorous experimentation** to build AI systems which will work on a bad day.
