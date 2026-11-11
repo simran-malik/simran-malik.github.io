@@ -49,10 +49,10 @@ projects:
     cover: RAG
     image: ''
     href: /projects/rag-chatbot
-  - title: Model Fine-tuning for Natural Language Schema Linking
+  - title: Supervised Fine-Tuning for Natural Language Schema Linking
     summary: 'Four-stage pipeline of fine-tuned adapters on Qwen2.5-Coder, raising schema-linking score from 0.097 to 0.627.'
     stack: PyTorch · PEFT · Qwen2.5
-    cover: SQL
+    cover: SFT
     image: ''
     href: /projects/schema-linking
   - title: Small Language Model Training
@@ -67,6 +67,20 @@ projects:
     cover: ROS2
     image: ''
     href: /projects/pupper-potter
+funIntro: Away from keyboard
+funSummary: 'Usually, you can find me detecting edge cases where my AI system would fail, figuring out why, and iterating over solutions. Otherwise, you will find me curled up with a cosy murder mystery and a hot cup of tea!'
+fun:
+  - title: Murder Mysteries
+    note: 'I have read all Agatha Christie books :)'
+    image: /books.jpg
+    link: 'https://www.goodreads.com/user/show/25222345-simran-malik'
+  - title: Chai
+    note: Sipped in peace with the morning sun
+    image: /chai.png
+    link: ''
+  - title: Knitting & Crocheting
+    note: 'Crafted 4 mufflers, 1 pair of gloves, 1 crochet top while listening to audiobooks'
+    image: /crochet.JPG
 contactLine: Building something with AI? Have a question? Interested in collaborating? I'd love to hear about it.
 ---
 

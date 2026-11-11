@@ -43,6 +43,12 @@ export const publications: {
 export const projects: { title: string; summary: string; stack: string; cover: string; image: string; href: string }[] =
   (home.projects ?? []).map((p: any) => ({ ...p, image: p.image ?? '', cover: p.cover ?? '' }));
 
+// The Life section: your interests. `image` (optional) is a path like '/fun/tea.jpg' in /public.
+export const funIntro: string = home.funIntro ?? '';
+export const funSummary: string = home.funSummary ?? '';
+export const fun: { title: string; note: string; image: string; link: string }[] =
+  (home.fun ?? []).map((f: any) => ({ title: f.title ?? '', note: f.note ?? '', image: f.image ?? '', link: f.link ?? '' }));
+
 // Used only if the blog feed can't be reached while the site builds.
 export const fallbackPosts = [
   {

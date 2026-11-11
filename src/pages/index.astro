@@ -3,7 +3,7 @@ import { Image } from 'astro:assets';
 import { Icon } from 'astro-icon/components';
 import Base from '../layouts/Base.astro';
 import Links from '../components/Links.astro';
-import { site, stats, work, publications, projects } from '../data';
+import { site, stats, work, publications, projects, fun, funIntro, funSummary } from '../data';
 import { getPosts, formatDate } from '../lib/blog';
 import photo from '../assets/simran.png';
 import * as home from '../site-content/home.md';
@@ -102,6 +102,26 @@ const logoFor = (name: string) => {
             <span class="tag">{[formatDate(post.date), post.readTime].filter(Boolean).join(' · ')}</span>
           </a>
         ))}
+      </div>
+    </section>
+
+    <section id="life" class="screen">
+      <div class="section-head">
+        <span class="label">Life</span>
+        {funIntro && <span class="meta">{funIntro}</span>}
+      </div>
+      {funSummary && <p class="bio fun-summary">{funSummary}</p>}
+      <div class="grid grid-4">
+        {fun.map((f) => {
+          const Tag = f.link ? 'a' : 'div';
+          return (
+            <Tag class="tile" {...(f.link ? { href: f.link, target: '_blank', rel: 'noopener' } : {})}>
+              {f.image && <div class="thumb"><img src={f.image} alt="" loading="lazy" /></div>}
+              <h3>{f.title}</h3>
+              {f.note && <p>{f.note}</p>}
+            </Tag>
+          );
+        })}
       </div>
     </section>
 

@@ -11,7 +11,7 @@ export default defineConfig({
   clientId: null,
   token: null,
   build: { outputFolder: 'admin', publicFolder: 'public' },
-  media: { tina: { mediaRoot: 'projects', publicFolder: 'public' } },
+  media: { tina: { mediaRoot: '', publicFolder: 'public' } },
   schema: {
     collections: [
       {
@@ -66,6 +66,18 @@ export default defineConfig({
               text('cover', 'Cover word (shown when there is no image)'),
               text('image', 'Image path (e.g. /projects/rag.png)'),
               text('href', 'Link to project page'),
+            ],
+          },
+          text('funIntro', 'Life section: short line beside the heading'),
+          paragraph('funSummary', 'Life section: summary (1–2 sentences, shown above the cards)'),
+          {
+            type: 'object', name: 'fun', label: 'Life (interests)', list: true,
+            ui: { itemProps: (i: any) => ({ label: i?.title }) },
+            fields: [
+              text('title', 'Interest'),
+              paragraph('note', 'A line about it'),
+              { type: 'image', name: 'image', label: 'Photo (optional)' },
+              text('link', 'Link (optional, e.g. a Goodreads list)'),
             ],
           },
           paragraph('contactLine', 'Contact line'),
