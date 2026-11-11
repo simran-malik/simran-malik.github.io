@@ -85,6 +85,13 @@ html.snap { scroll-snap-type: y mandatory; }
 }
 .pill svg { width: 18px; height: 18px; }
 .icon-btn:hover, .pill:hover { border-color: var(--ink); color: var(--ink); }
+/* brand colors for the icon links */
+.icon-btn.linkedin { color: #0a66c2; }
+.icon-btn.github { color: #181717; }
+.icon-btn.email { color: #ea4335; }
+.icon-btn.linkedin:hover { color: #0a66c2; border-color: #0a66c2; }
+.icon-btn.github:hover { color: #181717; border-color: #181717; }
+.icon-btn.email:hover { color: #ea4335; border-color: #ea4335; }
 
 /* ── Work timeline ── */
 .timeline { display: flex; flex-direction: column; max-width: 1000px; }
