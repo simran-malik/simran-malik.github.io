@@ -1,13 +1,13 @@
 /* ── Colors, fonts and spacing: change them here ── */
 :root {
-  --bg: #f6f4ef;
-  --card: #faf9f6;
+  --bg: #f3ebdc;
+  --card: #f9f4ea;
   --ink: #1c1917;
   --body: #44403c;
   --muted: #57534e;
   --faint: #6b6560;
-  --line: #e2ddd3;
-  --line-strong: #cfc8bb;
+  --line: #e2d7c3;
+  --line-strong: #cbbda4;
   --accent: #a4472a;
 
   --serif: 'Cormorant Garamond', Georgia, serif;
@@ -98,7 +98,7 @@ html.snap { scroll-snap-type: y mandatory; }
 .job { display: flex; gap: 36px; padding-bottom: 24px; }
 .job:last-child { padding-bottom: 0; }
 .rail { flex: 0 0 56px; display: flex; flex-direction: column; align-items: center; }
-.rail::after { content: ''; flex: 1 1 auto; width: 1px; background: #ddd7cc; margin-top: 8px; }
+.rail::after { content: ''; flex: 1 1 auto; width: 1px; background: #dacdb5; margin-top: 8px; }
 .job:last-child .rail::after { display: none; }
 .logo {
   width: 56px; height: 56px; border-radius: 50%; background: #fff; border: 1px solid var(--line);
@@ -106,7 +106,7 @@ html.snap { scroll-snap-type: y mandatory; }
   font-family: var(--serif); font-size: 22px; color: var(--faint);
 }
 .logo img { width: 70%; height: 70%; object-fit: contain; filter: grayscale(1); }
-.card { background: var(--card); border: 1px solid #e7e2d8; transition: border-color 0.2s; }
+.card { background: var(--card); border: 1px solid #e6dcc9; transition: border-color 0.2s; }
 a.card:hover, .job:hover .card { border-color: var(--line-strong); color: var(--ink); }
 .job .card { flex: 1 1 auto; min-width: 0; padding: 24px 32px; display: flex; flex-direction: column; gap: 8px; }
 .job .row { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px; }
@@ -128,7 +128,7 @@ a.card:hover, .job:hover .card { border-color: var(--line-strong); color: var(--
 .tile { display: flex; flex-direction: column; gap: 12px; }
 .thumb {
   position: relative; aspect-ratio: 16 / 9; max-height: min(320px, 34vh);
-  background: #ece7dd; border: 1px solid var(--line); overflow: hidden;
+  background: #eadfcb; border: 1px solid var(--line); overflow: hidden;
   display: flex; align-items: center; justify-content: center; font-size: 13px; color: var(--faint);
 }
 /* the image fills the frame without stretching it */
