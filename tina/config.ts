@@ -38,6 +38,18 @@ const workCard = [
   text('dates', 'Dates (card and page)'),
   text('points', 'Card bullet points (the first one shows)', { list: true }),
   text('logo', 'Logo file name in /public/logos (no extension)'),
+  text('stack', 'Page: Stack line in the header (e.g. Python · Go · SQL)'),
+  {
+    type: 'object' as const, name: 'links', label: 'Page: links under the summary (e.g. Publication, Code)', list: true,
+    ui: { itemProps: (i: any) => ({ label: i?.label }) },
+    fields: [text('label', 'Link text'), text('href', 'URL')],
+  },
+  text('spanned', 'Page: "My work spanned" tags (4 per row)', { list: true }),
+  {
+    type: 'object' as const, name: 'highlights', label: 'Page: Key Highlights cards', list: true,
+    ui: { itemProps: (i: any) => ({ label: `${i?.metric ?? ''} · ${i?.label ?? ''}` }) },
+    fields: [text('metric', 'Big number'), text('label', 'Short line under the number'), paragraph('text', 'One or two sentences')],
+  },
 ];
 const projectCard = [
   text('stack', 'Stack (card and page)'),

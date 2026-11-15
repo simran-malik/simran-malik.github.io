@@ -7,6 +7,10 @@ dates: Oct 2026 - Present
 points:
   - Enabling robots to answer natural language questions about the world around them.
 logo: ucsd
+highlights:
+  - metric: "Up to 3.5x"
+    label: "higher F1"
+    text: "Redesigned the prompts for an agentic system that answers questions over robot-built maps."
 order: 1
 facts: []
 construction: true

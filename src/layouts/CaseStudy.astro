@@ -1,10 +1,14 @@
 ---
 // Layout for the Markdown pages in src/pages/work/ and src/pages/projects/.
 // Each page sets these fields at the top (its "frontmatter").
+import fs from 'node:fs';
 import Base from './Base.astro';
 
 const { frontmatter } = Astro.props;
-const { title, summary, facts: rawFacts = [], back = '/#work', backLabel = 'Back', image, construction = false, repo = '' } = frontmatter;
+const {
+  title, summary, facts: rawFacts = [], back = '/#work', backLabel = 'Back', image, construction = false, repo = '',
+  spanned = [], highlights = [],
+} = frontmatter;
 // facts: a list of { label, value } (older pages may still use a plain label: value map).
 const listed: [string, string][] = Array.isArray(rawFacts)
   ? rawFacts.filter((f: any) => f?.label).map((f: any) => [f.label, f.value ?? ''])
@@ -13,23 +17,65 @@ const listed: [string, string][] = Array.isArray(rawFacts)
 const facts: [string, string][] = [
   ...(frontmatter.dates && !frontmatter.org ? [['When', frontmatter.dates] as [string, string]] : []),
   ...listed,
-  ...(frontmatter.stack ? [['Stack', frontmatter.stack] as [string, string]] : []),
+  ...(frontmatter.stack && !frontmatter.org ? [['Stack', frontmatter.stack] as [string, string]] : []),
 ];
 // construction: true shows the "under construction" note; repo: a GitHub link offered in the meantime.
+
+// Work pages (they have an `org`): compact header with logo, company name, then role · place · dates.
+const isWork = Boolean(frontmatter.org);
+const [company = '', ...orgRest] = String(frontmatter.org ?? '').split(' · ');
+const place = orgRest.join(' · ');
+const logoFiles = fs.existsSync('public/logos') ? fs.readdirSync('public/logos') : [];
+const logoFile = frontmatter.logo
+  ? logoFiles.find((f) => /\.(svg|png|jpe?g|webp)$/i.test(f) && f.replace(/\.[^.]+$/, '') === frontmatter.logo)
+  : undefined;
+const logo = logoFile ? `/logos/${logoFile}` : '';
+// spanned: short tags for the "My work spanned" band. highlights: { metric, label, text } cards.
+const spannedList: string[] = (spanned ?? []).filter(Boolean);
+const cards: any[] = (highlights ?? []).filter((h: any) => h?.metric || h?.text);
+// links: { label, href } shown side by side under the summary (e.g. Publication, Code).
+const pageLinks: any[] = (frontmatter.links ?? []).filter((l: any) => l?.label && l?.href);
 ---
 <Base title={`${title} — Simran Malik`} description={summary}>
-  <main class="case">
-    <div class="case-head">
-      <a class="back" href={back}>← {backLabel}</a>
-      {frontmatter.org && (
-        <div class="case-org">
-          <span class="kicker">{String(frontmatter.org).split(' · ').map((part, i) => <>{i > 0 && ' · '}<span class="nowrap">{part}</span></>)}</span>
-          {frontmatter.dates && <span class="meta">{frontmatter.dates}</span>}
+  <main class:list={['case', { work: isWork }]}>
+    {isWork ? (
+      <div class="work-head">
+        <a class="back-pill" href={back}>← {backLabel}</a>
+        <div class="work-row">
+          <div class="work-id">
+            {logo && <span class="work-logo"><img src={logo} alt="" /></span>}
+            <div class="work-name">
+              <h1>{company}</h1>
+              <p class="work-sub">
+                <span class="nowrap">{title}</span>
+                {place && <> · <span class="nowrap">{place}</span></>}
+                {frontmatter.dates && <> · <span class="nowrap">{frontmatter.dates}</span></>}
+              </p>
+            </div>
+          </div>
+          {frontmatter.stack && (
+            <div class="work-stack-area">
+              <aside class="work-stack" aria-label="Stack">
+                <span class="work-stack-label">Stack</span>
+                <span class="work-stack-list">{frontmatter.stack}</span>
+              </aside>
+            </div>
+          )}
         </div>
-      )}
-      <h1>{title}</h1>
-      {summary && <p class="summary">{summary}</p>}
-    </div>
+        {summary && <p class="summary">{summary}</p>}
+        {pageLinks.length > 0 && (
+          <p class="work-links">
+            {pageLinks.map((l: any) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
+          </p>
+        )}
+      </div>
+    ) : (
+      <div class="case-head">
+        <a class="back" href={back}>← {backLabel}</a>
+        <h1>{title}</h1>
+        {summary && <p class="summary">{summary}</p>}
+      </div>
+    )}
     {construction && (
       <div class="construction" role="note">
         <img src="/under-construction.png" alt="Under construction" width="60" height="71" />
@@ -45,7 +91,27 @@ const facts: [string, string][] = [
         {facts.map(([k, v]) => <div><span>{k}</span><span set:html={v} /></div>)}
       </div>
     )}
+    {spannedList.length > 0 && (
+      <section class="spanned" aria-labelledby="spanned-h">
+        <h2 id="spanned-h" class="spanned-label">My work spanned</h2>
+        <ul>{spannedList.map((s) => <li>{s}</li>)}</ul>
+      </section>
+    )}
+    {cards.length > 0 && (
+      <section class="highlights" aria-labelledby="highlights-h">
+        <h2 id="highlights-h">Key Highlights</h2>
+        <div class="hl-grid">
+          {cards.map((h) => (
+            <article class="hl">
+              {h.metric && <p class="hl-metric">{h.metric}</p>}
+              {h.label && <p class="hl-label">{h.label}</p>}
+              {h.text && <p class="hl-text">{h.text}</p>}
+            </article>
+          ))}
+        </div>
+      </section>
+    )}
     {image && <img src={image} alt="" />}
-    <div class="prose"><slot /></div>
+    <div class:list={['prose', { 'prose-cols': cards.length > 0 }]}><slot /></div>
   </main>
 </Base>
