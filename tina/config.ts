@@ -26,6 +26,7 @@ const caseStudy = (name: string, label: string, dir: string, back: string, backL
       fields: [text('label', 'Label'), text('value', 'Value')],
     },
     { type: 'boolean' as const, name: 'construction', label: 'Show "under construction" note' },
+    text('constructionNote', 'Text for that note (optional; default: "I\'m still writing this one up. Check back soon!")'),
     text('repo', 'GitHub repo link (shown in that note)'),
     text('back', 'Back link (leave as is)', { ui: { component: 'hidden' } }),
     text('backLabel', 'Back link text'),
@@ -55,6 +56,73 @@ const projectCard = [
   text('stack', 'Stack (card and page)'),
   text('cover', 'Cover word (card, shown when there is no image)'),
   { type: 'image' as const, name: 'image', label: 'Image (card thumbnail and page header)' },
+  {
+    type: 'object' as const, name: 'links', label: 'Page: links under the summary (e.g. Report). Code is added once the page is out of construction', list: true,
+    ui: { itemProps: (i: any) => ({ label: i?.label }) },
+    fields: [text('label', 'Link text'), text('href', 'URL')],
+  },
+  {
+    type: 'object' as const, name: 'problem', label: 'Page: the problem (shown above "My work spanned")',
+    fields: [text('title', 'Heading (default: The Problem)'), paragraph('text', 'Text')],
+  },
+  text('spanned', 'Page: "My work spanned" tags (4 per row)', { list: true }),
+  {
+    type: 'object' as const, name: 'stats', label: 'Page: big numbers (3 work best)', list: true,
+    ui: { itemProps: (i: any) => ({ label: `${i?.value ?? ''} ${i?.suffix ?? ''} · ${i?.label ?? ''}` }) },
+    fields: [text('value', 'Big number'), text('suffix', 'Smaller text after it (e.g. / 40)'), text('label', 'Line under the number')],
+  },
+  {
+    type: 'object' as const, name: 'ladder', label: 'Page: bar ladder (one bar per step, the last one highlighted)',
+    fields: [
+      text('title', 'Heading'), paragraph('intro', 'Line under the heading'),
+      {
+        type: 'object' as const, name: 'rows', label: 'Rows', list: true,
+        ui: { itemProps: (i: any) => ({ label: `${i?.label ?? ''}: ${i?.value ?? ''}` }) },
+        fields: [text('label', 'Label'), text('value', 'Number (sets the bar length)')],
+      },
+    ],
+  },
+  {
+    type: 'object' as const, name: 'steps', label: 'Page: row of step cards (the last one highlighted)',
+    fields: [
+      text('title', 'Heading'), text('note', 'Small note under the cards'),
+      {
+        type: 'object' as const, name: 'items', label: 'Cards', list: true,
+        ui: { itemProps: (i: any) => ({ label: `${i?.label ?? ''}: ${i?.value ?? ''}` }) },
+        fields: [text('label', 'Small label'), text('value', 'Big number'), text('note', 'Line under it')],
+      },
+    ],
+  },
+  {
+    type: 'object' as const, name: 'findings', label: 'Page: numbered finding cards (2 per row)',
+    fields: [
+      text('title', 'Heading'),
+      {
+        type: 'object' as const, name: 'items', label: 'Cards', list: true,
+        ui: { itemProps: (i: any) => ({ label: i?.label }) },
+        fields: [text('label', 'Small label'), text('text', 'Finding')],
+      },
+    ],
+  },
+  {
+    type: 'object' as const, name: 'figure', label: 'Page: figure (e.g. a loss curve)',
+    fields: [
+      text('title', 'Heading'), { type: 'image' as const, name: 'image', label: 'Image' }, text('alt', 'Image description (for screen readers)'),
+      paragraph('caption', 'Caption'), text('note', 'Small note under the caption'),
+    ],
+  },
+  {
+    type: 'object' as const, name: 'video', label: 'Page: demo video (shown after the step cards)',
+    fields: [
+      text('title', 'Heading (default: Demo)'), text('src', 'Video file path (e.g. /projects/demo.mp4)'),
+      { type: 'image' as const, name: 'poster', label: 'Poster image (shown before play)' },
+      paragraph('caption', 'Caption'), text('note', 'Small note under the caption'),
+    ],
+  },
+  {
+    type: 'object' as const, name: 'limitation', label: 'Page: limitation note at the end',
+    fields: [text('label', 'Label (e.g. Limitation)'), paragraph('text', 'Text')],
+  },
 ];
 
 export default defineConfig({

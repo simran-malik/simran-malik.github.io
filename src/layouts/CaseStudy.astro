@@ -6,7 +6,7 @@ import Base from './Base.astro';
 
 const { frontmatter } = Astro.props;
 const {
-  title, summary, facts: rawFacts = [], back = '/#work', backLabel = 'Back', image, construction = false, repo = '',
+  title, summary, facts: rawFacts = [], back = '/#work', backLabel = 'Back', image, construction = false, repo = '', constructionNote = '',
   spanned = [], highlights = [],
 } = frontmatter;
 // facts: a list of { label, value } (older pages may still use a plain label: value map).
@@ -19,7 +19,8 @@ const facts: [string, string][] = [
   ...listed,
   ...(frontmatter.stack && !frontmatter.org ? [['Stack', frontmatter.stack] as [string, string]] : []),
 ];
-// construction: true shows the "under construction" note; repo: a GitHub link offered in the meantime.
+// construction: true shows the "under construction" note; repo: a GitHub link offered in the meantime;
+// constructionNote: custom text for that note (used when there is no repo).
 
 // Work pages (they have an `org`): compact header with logo, company name, then role · place · dates.
 const isWork = Boolean(frontmatter.org);
@@ -35,54 +36,75 @@ const spannedList: string[] = (spanned ?? []).filter(Boolean);
 const cards: any[] = (highlights ?? []).filter((h: any) => h?.metric || h?.text);
 // links: { label, href } shown side by side under the summary (e.g. Publication, Code).
 const pageLinks: any[] = (frontmatter.links ?? []).filter((l: any) => l?.label && l?.href);
+
+// ── Project pages only ──
+// The line above the title: the facts' values (e.g. Course · Role · When), leaving out "Result".
+const kicker = listed.filter(([k, v]) => v && k.toLowerCase() !== 'result').map(([, v]) => v).join(' · ');
+// Links under the summary: the page's links, plus "Code" once the page is no longer under construction.
+const projectLinks: any[] = [...pageLinks, ...(repo && !construction ? [{ label: 'Code', href: repo }] : [])];
+// stats: three big numbers { value, suffix, label }.
+const stats: any[] = (frontmatter.stats ?? []).filter((s: any) => s?.value);
+// ladder: { title, intro, rows: [{ label, value }] }: one bar per row, scaled to the largest value.
+const ladder = frontmatter.ladder ?? {};
+const ladderRows: any[] = (ladder.rows ?? []).filter((r: any) => r?.label);
+const num = (v: any) => Number(String(v ?? '').replace(/[^0-9.]/g, '')) || 0;
+const ladderMax = Math.max(1, ...ladderRows.map((r) => num(r.value)));
+// steps: { title, note, items: [{ label, value, note }] }: a row of small cards; the last one is accented.
+const steps = frontmatter.steps ?? {};
+const stepItems: any[] = (steps.items ?? []).filter((s: any) => s?.label || s?.value);
+// findings: { title, items: [{ label, text }] }: numbered cards, two per row.
+const findings = frontmatter.findings ?? {};
+const findingItems: any[] = (findings.items ?? []).filter((f: any) => f?.label || f?.text);
+// figure: { title, image, alt, caption, note }.
+const figure = frontmatter.figure ?? {};
+// video: { title, src, poster, caption, note }: a demo video, shown after the step cards.
+const video = frontmatter.video ?? {};
+// limitation: { label, text }: a dashed note at the end of the page.
+const limitation = frontmatter.limitation ?? {};
+// problem: { title, text }: shown above "My work spanned" on project pages.
+const problem = frontmatter.problem ?? {};
+const pad = (i: number) => String(i + 1).padStart(2, '0');
 ---
 <Base title={`${title} — Simran Malik`} description={summary}>
-  <main class:list={['case', { work: isWork }]}>
-    {isWork ? (
-      <div class="work-head">
-        <a class="back-pill" href={back}>← {backLabel}</a>
-        <div class="work-row">
-          <div class="work-id">
-            {logo && <span class="work-logo"><img src={logo} alt="" /></span>}
-            <div class="work-name">
-              <h1>{company}</h1>
-              <p class="work-sub">
-                <span class="nowrap">{title}</span>
-                {place && <> · <span class="nowrap">{place}</span></>}
-                {frontmatter.dates && <> · <span class="nowrap">{frontmatter.dates}</span></>}
-              </p>
-            </div>
+  {isWork ? (
+  <main class="case work">
+    <div class="work-head">
+      <a class="back-pill" href={back}>← {backLabel}</a>
+      <div class="work-row">
+        <div class="work-id">
+          {logo && <span class="work-logo"><img src={logo} alt="" /></span>}
+          <div class="work-name">
+            <h1>{company}</h1>
+            <p class="work-sub">
+              <span class="nowrap">{title}</span>
+              {place && <> · <span class="nowrap">{place}</span></>}
+              {frontmatter.dates && <> · <span class="nowrap">{frontmatter.dates}</span></>}
+            </p>
           </div>
-          {frontmatter.stack && (
-            <div class="work-stack-area">
-              <aside class="work-stack" aria-label="Stack">
-                <span class="work-stack-label">Stack</span>
-                <span class="work-stack-list">{frontmatter.stack}</span>
-              </aside>
-            </div>
-          )}
         </div>
-        {summary && <p class="summary">{summary}</p>}
-        {pageLinks.length > 0 && (
-          <p class="work-links">
-            {pageLinks.map((l: any) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
-          </p>
+        {frontmatter.stack && (
+          <div class="work-stack-area">
+            <aside class="work-stack" aria-label="Stack">
+              <span class="work-stack-label">Stack</span>
+              <span class="work-stack-list">{frontmatter.stack}</span>
+            </aside>
+          </div>
         )}
       </div>
-    ) : (
-      <div class="case-head">
-        <a class="back" href={back}>← {backLabel}</a>
-        <h1>{title}</h1>
-        {summary && <p class="summary">{summary}</p>}
-      </div>
-    )}
+      {summary && <p class="summary">{summary}</p>}
+      {pageLinks.length > 0 && (
+        <p class="work-links">
+          {pageLinks.map((l: any) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
+        </p>
+      )}
+    </div>
     {construction && (
       <div class="construction" role="note">
         <img src="/under-construction.png" alt="Under construction" width="60" height="71" />
         <p>
           {repo
             ? <>Till it's ready, here's the GitHub repo: <a href={repo} target="_blank" rel="noopener">{repo.replace(/^https?:\/\//, '')} ↗</a></>
-            : <>I'm still writing this one up. Check back soon!</>}
+            : <>{constructionNote || "I'm still writing this one up. Check back soon!"}</>}
         </p>
       </div>
     )}
@@ -114,4 +136,124 @@ const pageLinks: any[] = (frontmatter.links ?? []).filter((l: any) => l?.label &
     {image && <img src={image} alt="" />}
     <div class:list={['prose', { 'prose-cols': cards.length > 0 }]}><slot /></div>
   </main>
+  ) : (
+  <main class="case project">
+    <div class="proj-head">
+      <a class="back-pill" href={back}>← {backLabel}</a>
+      {kicker && <p class="kicker">{kicker}</p>}
+      <h1>{title}</h1>
+      {summary && <p class="summary">{summary}</p>}
+      {(projectLinks.length > 0 || frontmatter.stack) && (
+        <p class="proj-meta">
+          {projectLinks.map((l: any) => <a href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>)}
+          {frontmatter.stack && <span class="proj-stack">{frontmatter.stack}</span>}
+        </p>
+      )}
+    </div>
+    {construction && (
+      <div class="construction" role="note">
+        <img src="/under-construction.png" alt="Under construction" width="60" height="71" />
+        <p>
+          {repo
+            ? <>Till it's ready, here's the GitHub repo: <a href={repo} target="_blank" rel="noopener">{repo.replace(/^https?:\/\//, '')} ↗</a></>
+            : <>{constructionNote || "I'm still writing this one up. Check back soon!"}</>}
+        </p>
+      </div>
+    )}
+    {image && <img class="proj-image" src={image} alt="" />}
+    {problem.text && (
+      <section class="psec">
+        <h2>{problem.title || 'The Problem'}</h2>
+        <p class="psec-intro">{problem.text}</p>
+      </section>
+    )}
+    {spannedList.length > 0 && (
+      <section class="spanned" aria-labelledby="spanned-h">
+        <h2 id="spanned-h" class="spanned-label">My work spanned</h2>
+        <ul>{spannedList.map((s) => <li>{s}</li>)}</ul>
+      </section>
+    )}
+    {stats.length > 0 && (
+      <div class="pstats">
+        {stats.map((s) => (
+          <div class="pcard pstat">
+            <p class="pstat-value">{s.value}{s.suffix && <small> {s.suffix}</small>}</p>
+            {s.label && <p class="pstat-label">{s.label}</p>}
+          </div>
+        ))}
+      </div>
+    )}
+    {ladderRows.length > 0 && (
+      <section class="psec">
+        {ladder.title && <h2>{ladder.title}</h2>}
+        {ladder.intro && <p class="psec-intro">{ladder.intro}</p>}
+        <div class="pcard ladder">
+          {ladderRows.map((r, i) => (
+            <div class:list={['rung', { 'is-last': i === ladderRows.length - 1 }]}>
+              <span class="rung-label">{r.label}</span>
+              <span class="rung-track" aria-hidden="true"><span class="rung-bar" style={`width:${(num(r.value) / ladderMax * 100).toFixed(1)}%`}></span></span>
+              <span class="rung-val">{r.value}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+    {stepItems.length > 0 && (
+      <section class="psec">
+        {steps.title && <h2>{steps.title}</h2>}
+        <div class="steps">
+          {stepItems.map((s, i) => (
+            <div class:list={['pcard', 'step', { 'is-last': i === stepItems.length - 1 }]}>
+              {s.label && <p class="step-label">{s.label}</p>}
+              {s.value && <p class="step-value">{s.value}</p>}
+              {s.note && <p class="step-note">{s.note}</p>}
+            </div>
+          ))}
+        </div>
+        {steps.note && <p class="psec-note">{steps.note}</p>}
+      </section>
+    )}
+    {video.src && (
+      <section class="psec" aria-labelledby="demo-h">
+        <h2 id="demo-h">{video.title || 'Demo'}</h2>
+        <div class="pcard video-box">
+          <video controls playsinline preload="metadata" poster={video.poster || undefined}>
+            <source src={video.src} type="video/mp4" />
+            <a href={video.src}>Download the demo video</a>
+          </video>
+        </div>
+        {video.caption && <p class="psec-intro">{video.caption}</p>}
+        {video.note && <p class="psec-note">{video.note}</p>}
+      </section>
+    )}
+    {findingItems.length > 0 && (
+      <section class="psec">
+        {findings.title && <h2>{findings.title}</h2>}
+        <div class="findings">
+          {findingItems.map((f, i) => (
+            <div class="pcard finding">
+              <p class="finding-label">{pad(i)}{f.label && <> · {f.label}</>}</p>
+              {f.text && <p class="finding-text">{f.text}</p>}
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+    {figure.image && (
+      <section class="psec">
+        {figure.title && <h2>{figure.title}</h2>}
+        <div class="pcard figure-box"><img src={figure.image} alt={figure.alt ?? ''} loading="lazy" /></div>
+        {figure.caption && <p class="psec-intro">{figure.caption}</p>}
+        {figure.note && <p class="psec-note">{figure.note}</p>}
+      </section>
+    )}
+    <div class="prose prose-cols"><slot /></div>
+    {limitation.text && (
+      <section class="pcard limitation">
+        <h2>{limitation.label || 'Limitation'}</h2>
+        <p>{limitation.text}</p>
+      </section>
+    )}
+  </main>
+  )}
 </Base>
